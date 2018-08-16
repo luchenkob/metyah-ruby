@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start at:</strong>
+  <%= @event.start_at %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @event.end_at %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @event.address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @event.code %>
+</p>
+
+<p>
+  <strong>Event status:</strong>
+  <%= @event.event_status %>
+</p>
+
+<p>
+  <strong>Event type:</strong>
+  <%= @event.event_type %>
+</p>
+
+<p>
+  <strong>Display profiles after minutes:</strong>
+  <%= @event.display_profiles_after_minutes %>
+</p>
+
+<p>
+  <strong>Display profile for minutes:</strong>
+  <%= @event.display_profile_for_minutes %>
+</p>
+
+<p>
+  <strong>Allow messaging after minutes:</strong>
+  <%= @event.allow_messaging_after_minutes %>
+</p>
+
+<p>
+  <strong>Allow messaging for minutes:</strong>
+  <%= @event.allow_messaging_for_minutes %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
