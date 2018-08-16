@@ -33,6 +33,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-rails'
+
+# For Bootstrap 3 scaffolds, which can be relatively easily converted to Bootstrap 4
+# Do not run any generator other than "rails g bootstrap:layout [LAYOUT_NAME]"
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap', '~> 4.1.3' # For bootstrap 4
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
