@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 2018_08_16_184533) do
     t.string "event_status"
     t.string "event_type"
     t.integer "display_profiles_after_minutes"
-    t.integer "display_profile_for_minutes"
+    t.integer "display_profiles_for_minutes"
     t.integer "allow_messaging_after_minutes"
     t.integer "allow_messaging_for_minutes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_events_on_code", unique: true
   end
 
 end

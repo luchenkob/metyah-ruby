@@ -46,30 +46,23 @@
   <div class="form-group">
     <%= f.label :description, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :description, :class => 'form-control' %>
+      <%= f.text_area :description, :class => 'form-control' %>
     </div>
     <%=f.error_span(:description) %>
   </div>
   <div class="form-group">
-    <%= f.label :code, :class => 'control-label col-lg-2' %>
+    <%= f.label :event_type, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :code, :class => 'form-control' %>
+      <%= f.select :event_type, Event::EVENT_TYPES, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:code) %>
+    <%=f.error_span(:event_type) %>
   </div>
   <div class="form-group">
     <%= f.label :event_status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :event_status, :class => 'form-control' %>
+      <%= f.select :event_status, Event::EVENT_STATUSES, :class => 'form-control' %>
     </div>
     <%=f.error_span(:event_status) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :event_type, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :event_type, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:event_type) %>
   </div>
   <div class="form-group">
     <%= f.label :display_profiles_after_minutes, :class => 'control-label col-lg-2' %>
@@ -79,11 +72,11 @@
     <%=f.error_span(:display_profiles_after_minutes) %>
   </div>
   <div class="form-group">
-    <%= f.label :display_profile_for_minutes, :class => 'control-label col-lg-2' %>
+    <%= f.label :display_profiles_for_minutes, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :display_profile_for_minutes, :class => 'form-control' %>
+      <%= f.text_field :display_profiles_for_minutes, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:display_profile_for_minutes) %>
+    <%=f.error_span(:display_profiles_for_minutes) %>
   </div>
   <div class="form-group">
     <%= f.label :allow_messaging_after_minutes, :class => 'control-label col-lg-2' %>

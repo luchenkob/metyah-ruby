@@ -6,19 +6,12 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:start_at) %></th>
       <th><%= model_class.human_attribute_name(:end_at) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:code) %></th>
       <th><%= model_class.human_attribute_name(:event_status) %></th>
       <th><%= model_class.human_attribute_name(:event_type) %></th>
-      <th><%= model_class.human_attribute_name(:display_profiles_after_minutes) %></th>
-      <th><%= model_class.human_attribute_name(:display_profile_for_minutes) %></th>
-      <th><%= model_class.human_attribute_name(:allow_messaging_after_minutes) %></th>
-      <th><%= model_class.human_attribute_name(:allow_messaging_for_minutes) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:code) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -26,19 +19,12 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= link_to event.id, event_path(event) %></td>
-        <td><%= event.start_at %></td>
-        <td><%= event.end_at %></td>
         <td><%= event.name %></td>
-        <td><%= event.address %></td>
-        <td><%= event.description %></td>
-        <td><%= event.code %></td>
+        <td><%= event.start_at.strftime('%Y/%m/%d') %><br><%= event.start_at.strftime('%I:%M %p') %></td>
+        <td><%= event.end_at.strftime('%Y/%m/%d') %><br><%= event.end_at.strftime('%I:%M %p') %></td>
         <td><%= event.event_status %></td>
         <td><%= event.event_type %></td>
-        <td><%= event.display_profiles_after_minutes %></td>
-        <td><%= event.display_profile_for_minutes %></td>
-        <td><%= event.allow_messaging_after_minutes %></td>
-        <td><%= event.allow_messaging_for_minutes %></td>
-        <td><%=l event.created_at %></td>
+        <td><%= event.code %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       event_path(event), :class => 'btn btn-default btn-xs' %>

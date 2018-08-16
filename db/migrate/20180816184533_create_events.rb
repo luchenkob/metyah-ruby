@@ -10,11 +10,13 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :event_status
       t.string :event_type
       t.integer :display_profiles_after_minutes
-      t.integer :display_profile_for_minutes
+      t.integer :display_profiles_for_minutes
       t.integer :allow_messaging_after_minutes
       t.integer :allow_messaging_for_minutes
 
       t.timestamps
     end
+
+    add_index :events, :code, unique: true
   end
 end
