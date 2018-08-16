@@ -1,64 +1,41 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Event -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Start at:</strong>
-  <%= @event.start_at %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:start_at) %>:</strong></dt>
+  <dd><%= @event.start_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:end_at) %>:</strong></dt>
+  <dd><%= @event.end_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @event.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @event.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @event.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
+  <dd><%= @event.code %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:event_status) %>:</strong></dt>
+  <dd><%= @event.event_status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:event_type) %>:</strong></dt>
+  <dd><%= @event.event_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:display_profiles_after_minutes) %>:</strong></dt>
+  <dd><%= @event.display_profiles_after_minutes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:display_profile_for_minutes) %>:</strong></dt>
+  <dd><%= @event.display_profile_for_minutes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:allow_messaging_after_minutes) %>:</strong></dt>
+  <dd><%= @event.allow_messaging_after_minutes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:allow_messaging_for_minutes) %>:</strong></dt>
+  <dd><%= @event.allow_messaging_for_minutes %></dd>
+</dl>
 
-<p>
-  <strong>End at:</strong>
-  <%= @event.end_at %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @event.address %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @event.code %>
-</p>
-
-<p>
-  <strong>Event status:</strong>
-  <%= @event.event_status %>
-</p>
-
-<p>
-  <strong>Event type:</strong>
-  <%= @event.event_type %>
-</p>
-
-<p>
-  <strong>Display profiles after minutes:</strong>
-  <%= @event.display_profiles_after_minutes %>
-</p>
-
-<p>
-  <strong>Display profile for minutes:</strong>
-  <%= @event.display_profile_for_minutes %>
-</p>
-
-<p>
-  <strong>Allow messaging after minutes:</strong>
-  <%= @event.allow_messaging_after_minutes %>
-</p>
-
-<p>
-  <strong>Allow messaging for minutes:</strong>
-  <%= @event.allow_messaging_for_minutes %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              events_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_event_path(@event), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              event_path(@event),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

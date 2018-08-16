@@ -1,77 +1,111 @@
-<%= form_with(model: event, local: true) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<%= form_for @event, :html => { :class => "form-horizontal event" } do |f| %>
 
-      <ul>
-      <% event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @event.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :start_at %>
-    <%= form.datetime_select :start_at %>
+  <div class="form-group">
+    <%= f.label :start_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :start_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:start_at) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :end_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:end_at) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :address, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:address) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:description) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :code, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :code, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:code) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :event_status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :event_status, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:event_status) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :event_type, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :event_type, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:event_type) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :display_profiles_after_minutes, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :display_profiles_after_minutes, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:display_profiles_after_minutes) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :display_profile_for_minutes, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :display_profile_for_minutes, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:display_profile_for_minutes) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :allow_messaging_after_minutes, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :allow_messaging_after_minutes, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:allow_messaging_after_minutes) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :allow_messaging_for_minutes, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :allow_messaging_for_minutes, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:allow_messaging_for_minutes) %>
   </div>
 
-  <div class="field">
-    <%= form.label :end_at %>
-    <%= form.datetime_select :end_at %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                events_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_status %>
-    <%= form.text_field :event_status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_type %>
-    <%= form.text_field :event_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :display_profiles_after_minutes %>
-    <%= form.number_field :display_profiles_after_minutes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :display_profile_for_minutes %>
-    <%= form.number_field :display_profile_for_minutes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :allow_messaging_after_minutes %>
-    <%= form.number_field :allow_messaging_after_minutes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :allow_messaging_for_minutes %>
-    <%= form.number_field :allow_messaging_for_minutes %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
