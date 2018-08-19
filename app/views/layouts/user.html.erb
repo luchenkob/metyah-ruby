@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= render partial: 'layouts/shared/head' %>
+    <%= render partial: 'layouts/user/head' %>
+    <%= content_for :head %>
+  </head>
+    <body>
+      <%= render partial: 'layouts/user/nav' %>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <%= bootstrap_flash %>
+            <%= yield %>
+          </div>
+        </div>
+        <!--/row-->
+        <footer>
+          <p>&#xA9; Metyah 2018</p>
+        </footer>
+      </div>
+      <!-- /container -->
+    </body>
+</html>
