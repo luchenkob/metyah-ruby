@@ -1,6 +1,7 @@
 class CreateEvents < ActiveRecord::Migration[5.2]
   def change
     create_table :events do |t|
+      t.references :place, foreign_key: true
       t.datetime :start_at
       t.datetime :end_at
       t.string :start_end_at

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2018_08_19_030124) do
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
+    t.bigint "place_id"
     t.datetime "start_at"
     t.datetime "end_at"
     t.string "start_end_at"
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(version: 2018_08_19_030124) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_events_on_code", unique: true
+    t.index ["place_id"], name: "index_events_on_place_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -43,4 +45,5 @@ ActiveRecord::Schema.define(version: 2018_08_19_030124) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "events", "places"
 end
