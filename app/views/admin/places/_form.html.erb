@@ -1,4 +1,4 @@
-<%= form_for @place, :html => { :class => "form-horizontal event" } do |f| %>
+<%= form_for [:admin, @place], :html => { :class => "form-horizontal event" } do |f| %>
 
   <% if @place.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -62,7 +62,7 @@
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                places_path, :class => 'btn btn-default' %>
+                admin_places_path, :class => 'btn btn-default' %>
     </div>
   </div>
 
