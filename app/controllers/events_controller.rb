@@ -24,6 +24,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    puts event_params.inspect
     @event = Event.new(event_params)
 
     respond_to do |format|
@@ -64,6 +65,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:start_at, :end_at, :name, :address, :description, :code, :event_status, :event_type, :display_profiles_after_minutes, :display_profiles_for_minutes, :allow_messaging_after_minutes, :allow_messaging_for_minutes)
+      params.require(:event).permit(:start_end_at, :name, :address, :description, :code, :event_status, :event_type, :display_profiles_after_minutes, :display_profiles_for_minutes, :allow_messaging_after_minutes, :allow_messaging_for_minutes)
     end
 end
