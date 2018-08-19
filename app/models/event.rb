@@ -46,8 +46,6 @@ class Event < ApplicationRecord
   end
 
   def split_start_end_at
-    # Ensure datetimes are stored with the correct timezone
-
     # Expected format of start_end_at: 08/18/2018 3:56 PM - 08/18/2018 3:56 PM
     # - Todo: Add timezone handling
     puts "start_end_at: #{start_end_at}"
