@@ -5,3 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Place.create(name: "Calgary, AB, Canada", tax_rate: 0.05, timezone: "Mountain Time (US & Canada)", currency: "CAN")

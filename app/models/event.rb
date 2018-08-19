@@ -3,8 +3,10 @@ class Event < ApplicationRecord
   before_validation :set_code, unless: Proc.new { |event| event.code.present? }
   before_save :split_start_end_at
 
+  belongs_to :place
+
   validates :code, presence: true, uniqueness: true
-  validates :start_end_at, presence: true
+  validates :start_end_at, :place_id, presence: true
   validates :display_profiles_after_minutes,
             :display_profiles_for_minutes,
             :allow_messaging_after_minutes,
