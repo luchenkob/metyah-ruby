@@ -12,6 +12,10 @@
   <dd><%= @place.tax_rate %></dd>
   <dt><strong><%= model_class.human_attribute_name(:currency) %>:</strong></dt>
   <dd><%= @place.currency %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_format) %>:</strong></dt>
+  <dd><%= @place.date_format %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:time_format) %>:</strong></dt>
+  <dd><%= @place.time_format %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

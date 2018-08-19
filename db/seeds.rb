@@ -11,6 +11,6 @@ Place.create(
   tax_rate: 0.05,
   timezone: "Mountain Time (US & Canada)",
   currency: "CAN",
-  date_format: '%Y/%m/%d',
+  date_format: '%m/%d/%Y',
   time_format: '%I:%M %p',
 )

@@ -10,6 +10,8 @@
       <th><%= model_class.human_attribute_name(:timezone) %></th>
       <th><%= model_class.human_attribute_name(:tax_rate) %></th>
       <th><%= model_class.human_attribute_name(:currency) %></th>
+      <th><%= model_class.human_attribute_name(:date_format) %></th>
+      <th><%= model_class.human_attribute_name(:time_format) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -21,6 +23,8 @@
         <td><%= place.timezone %></td>
         <td><%= place.tax_rate %></td>
         <td><%= place.currency %></td>
+        <td><%= Time.current.in_time_zone(place.timezone).strftime(place.date_format) %><br><%= place.date_format %></td>
+        <td><%= Time.current.in_time_zone(place.timezone).strftime(place.time_format) %><br><%= place.time_format %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       place_path(place), :class => 'btn btn-default btn-xs' %>

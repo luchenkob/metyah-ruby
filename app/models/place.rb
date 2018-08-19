@@ -1,7 +1,7 @@
 class Place < ApplicationRecord
   has_one :event, dependent: :destroy
 
-  validates :tax_rate, :timezone, :currency, presence: true
+  validates :tax_rate, :timezone, :currency, :time_format, :date_format, presence: true
   validates :tax_rate,
             numericality: {
               greater_than_or_equal_to: 0,

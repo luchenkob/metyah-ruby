@@ -51,8 +51,46 @@ class Event < ApplicationRecord
     # Expected format of start_end_at: 08/18/2018 3:56 PM - 08/18/2018 3:56 PM
     # - Todo: Add timezone handling
     puts "start_end_at: #{start_end_at}"
-    self.start_at, self.end_at = self.start_end_at.split(" - ").map { |date| DateTime.strptime(date, "%m/%d/%Y %H:%M %p") }
 
+    self.start_at, self.end_at = self
+    .start_end_at
+    .split(" - ")
+    .map do |date|
+      DateTime
+      .strptime("#{date} #{place.timezone}", "%m/%d/%Y %H:%M %p %z")
+    end
+  end
+
+  def start_at_zoned
+    start_at.in_time_zone(place.timezone)
+  end
+
+  def start_at_zoned_date
+    start_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
+  end
+
+  def start_at_zoned_time
+    start_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
+  end
+
+  def start_at_zoned_datetime
+    start_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
+  end
+
+  def end_at_zoned
+    end_at.in_time_zone(place.timezone)
+  end
+
+  def end_at_zoned_date
+    end_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
+  end
+
+  def end_at_zoned_time
+    end_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
+  end
+
+  def end_at_zoned_datetime
+    end_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
   end
 
   def set_code

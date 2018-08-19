@@ -20,8 +20,8 @@
       <tr>
         <td><%= link_to event.id, event_path(event) %></td>
         <td><%= event.name %></td>
-        <td><%= event.start_at.strftime('%Y/%m/%d') %><br><%= event.start_at.strftime('%I:%M %p') %></td>
-        <td><%= event.end_at.strftime('%Y/%m/%d') %><br><%= event.end_at.strftime('%I:%M %p') %></td>
+        <td><%= event.start_at_zoned_date %><br><%= event.start_at_zoned_time %></td>
+        <td><%= event.end_at_zoned_date %><br><%= event.end_at_zoned_time %></td>
         <td><%= event.event_status %></td>
         <td><%= event.event_type %></td>
         <td><%= event.code %></td>
