@@ -16,18 +16,11 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :start_at, :class => 'control-label col-lg-2' %>
+    <%= f.label :start_end_at, "Event Runs", :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :start_at, :class => 'form-control' %>
+      <%= f.text_field :start_end_at, :class => 'calentim col-lg-10' %>
     </div>
-    <%=f.error_span(:start_at) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :end_at, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :end_at, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:end_at) %>
+    <%=f.error_span(:start_end_at) %>
   </div>
   <div class="form-group">
     <%= f.label :name, :class => 'control-label col-lg-2' %>
@@ -102,3 +95,13 @@
   </div>
 
 <% end %>
+
+<script>
+  var calentimOptions = {
+    minDate: moment("<%= Time.current.to_date %>", "YYYY-MM-DD"),
+    showHeader: false, // Hide selected dates
+    showFooter: false, // Hide ranges
+  };
+
+  $(".calentim").calentim(calentimOptions);
+</script>

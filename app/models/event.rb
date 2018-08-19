@@ -1,9 +1,10 @@
 class Event < ApplicationRecord
   after_initialize :set_default_values
   before_validation :set_code, unless: Proc.new { |event| event.code.present? }
-  before_validation :standardize
+  before_save :split_start_end_at
 
   validates :code, presence: true, uniqueness: true
+  validates :start_end_at, presence: true
   validates :display_profiles_after_minutes,
             :display_profiles_for_minutes,
             :allow_messaging_after_minutes,
@@ -30,8 +31,6 @@ class Event < ApplicationRecord
   def set_default_values
     # Defaults are not intended to be valid, only sensible.
     # With defaults Model.create should always fail.
-    self.start_at ||= Time.current # Temp
-    self.end_at ||= Time.current + 5.hours # Temp
     self.name ||= ""
     self.description ||= ""
     self.code ||= ""
@@ -44,7 +43,16 @@ class Event < ApplicationRecord
   end
 
   def standardize
+  end
+
+  def split_start_end_at
     # Ensure datetimes are stored with the correct timezone
+
+    # Expected format of start_end_at: 08/18/2018 3:56 PM - 08/18/2018 3:56 PM
+    # - Todo: Add timezone handling
+    puts "start_end_at: #{start_end_at}"
+    self.start_at, self.end_at = self.start_end_at.split(" - ").map { |date| DateTime.strptime(date, "%m/%d/%Y %H:%M %p") }
+
   end
 
   def set_code
