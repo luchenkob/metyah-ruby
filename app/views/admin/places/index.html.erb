@@ -18,7 +18,7 @@
   <tbody>
     <% @places.each do |place| %>
       <tr>
-        <td><%= link_to place.id, place_path(place) %></td>
+        <td><%= link_to place.id, admin_place_path(place) %></td>
         <td><%= place.name %></td>
         <td><%= place.timezone %></td>
         <td><%= place.tax_rate %></td>
@@ -27,11 +27,11 @@
         <td><%= Time.current.in_time_zone(place.timezone).strftime(place.time_format) %><br><%= place.time_format %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
-                      place_path(place), :class => 'btn btn-default btn-xs' %>
+                      admin_place_path(place), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_place_path(place), :class => 'btn btn-default btn-xs' %>
+                      edit_admin_place_path(place), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      place_path(place),
+                      admin_place_path(place),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
@@ -42,5 +42,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_place_path,
+            new_admin_place_path,
             :class => 'btn btn-primary' %>
