@@ -176,6 +176,7 @@ class Event < ApplicationRecord
     #     allow_messaging_starts_at_zoned_time, allow_messaging_starts_at_zoned_datetime
     #   allow_messaging_ends_at_zoned, allow_messaging_ends_at_zoned_date,
     #     allow_messaging_ends_at_zoned_time, allow_messaging_ends_at_zoned_datetime
+    # Note: Refactor this to 4 view helper methods if more methods are added
 
     define_method("#{zone_method}_zoned") do
       send(zone_method).in_time_zone(place.timezone)
