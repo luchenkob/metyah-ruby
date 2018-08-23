@@ -39,7 +39,7 @@
   <div class="form-group">
     <%= f.label :place_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :place_id, Place.pluck(:name, :id), :class => 'form-control' %>
+      <%= f.select :place_id, Place.pluck(:name, :id), {}, { :class => 'form-control' } %>
     </div>
     <%=f.error_span(:place_id) %>
   </div>
@@ -53,14 +53,14 @@
   <div class="form-group">
     <%= f.label :event_type, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :event_type, Event::EVENT_TYPES, :class => 'form-control' %>
+      <%= f.select :event_type, Event::EVENT_TYPES, {}, { :class => 'form-control' } %>
     </div>
     <%=f.error_span(:event_type) %>
   </div>
   <div class="form-group">
     <%= f.label :event_status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :event_status, Event::EVENT_STATUSES, :class => 'form-control' %>
+      <%= f.select :event_status, Event::EVENT_STATUSES, {}, { :class => 'form-control' } %>
     </div>
     <%=f.error_span(:event_status) %>
   </div>
