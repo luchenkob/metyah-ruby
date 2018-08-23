@@ -16,6 +16,7 @@ class User::EventsController < UserController
   end
 
   def search
+    @events = Event.all
   end
 
   private
