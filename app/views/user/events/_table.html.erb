@@ -17,8 +17,21 @@
         <td><%= event.end_at_zoned_date %><br><%= event.end_at_zoned_time %></td>
         <td><%= event.event_type %></td>
         <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      user_event_path(event), :class => 'btn btn-default btn-xs' %>
+          <% case event_action %>
+          <% when :join %>
+            <%= link_to "Join",
+                        user_event_path(event), :class => 'btn btn-default btn-xs' %>
+            Join
+          <% when :current %>
+            <%= link_to "Goto",
+                        user_current_event_path(id: event.id), :class => 'btn btn-default btn-xs' %>
+          <% when :review %>
+            <%= link_to "Review",
+                        user_current_event_path(id: event.id), :class => 'btn btn-default btn-xs' %>
+          <% when :show %>
+            <%= link_to t('.show', :default => t("helpers.links.show")),
+                        user_event_path(event), :class => 'btn btn-default btn-xs' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
