@@ -1,0 +1,16 @@
+<h1><% @current_event.name %></h1>
+<ul class="nav nav-pills nav-pills-primary justify-content-center">
+  <li class='nav-item'>
+    <%= link_to "Attendees", attendees_user_current_event_path(id: @current_event.id),
+                class: "nav-link #{active_navigation?("current", "attendees")}"  %>
+  </li>
+  <li class='nav-item'>
+    <%= link_to "Favs", favorites_user_current_event_path(id: @current_event.id),
+                class: "nav-link #{active_navigation?("current", "favorites")}"  %>
+  </li>
+  <li class='nav-item'>
+    <%= link_to "Inbox", inbox_user_current_event_path(id: @current_event.id),
+                class: "nav-link #{active_navigation?("current", "inbox")}"  %>
+  </li>
+</ul>
+<br>

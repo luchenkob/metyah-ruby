@@ -2,7 +2,7 @@ class User::EventsController < UserController
   before_action :set_event, only: [:show]
 
   def index
-    @events = Event.all
+    redirect_to my_events_user_events_path
   end
 
   def show
