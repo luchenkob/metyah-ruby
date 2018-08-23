@@ -12,6 +12,9 @@
         <li class='nav-item <%= active_navigation?("events") %>'>
           <%= link_to "Events", user_events_path, class: "nav-link"  %>
         </li>
+        <li class='nav-item <%= active_navigation?("current") %>'>
+          <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
+        </li>
       </ul>
       <form class="form-inline ml-auto" data-background-color>
           <div class="form-group has-white">

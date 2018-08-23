@@ -1,0 +1,15 @@
+<ul class="nav nav-pills nav-pills-primary justify-content-center">
+  <li class='nav-item'>
+    <%= link_to "My Events", my_events_user_events_path,
+                class: "nav-link #{active_navigation?("events", "my_events")}"  %>
+  </li>
+  <li class='nav-item'>
+    <%= link_to "Join", join_user_events_path,
+                class: "nav-link #{active_navigation?("events", "join")}"  %>
+  </li>
+  <li class='nav-item'>
+    <%= link_to "Search", search_user_events_path,
+                class: "nav-link #{active_navigation?("events", "search")}"  %>
+  </li>
+</ul>
+<br>

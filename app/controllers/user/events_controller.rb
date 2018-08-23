@@ -8,6 +8,17 @@ class User::EventsController < UserController
   def show
   end
 
+  def my_events
+    @events = Event.all
+  end
+
+  def join
+  end
+
+  def search
+    @events = Event.all
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
