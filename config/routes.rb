@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-
+  get 'user', to: 'user/events#index'
+  get 'user/events', to: 'user/events#index'
+  get 'user/events/current', to: 'user/events/current#attendees'
   namespace :user do
     resources :events, only: [:show, :index] do
       collection do
@@ -7,14 +9,20 @@ Rails.application.routes.draw do
         get 'join'
         get 'search'
       end
+
+      member do
+        get 'current/attendees' => 'users/events/current#attendees'
+        get 'current/favorites' => 'users/events/current#favorites'
+        get 'current/inbox' => 'users/events/current#inbox'
+        get 'current' => 'users/events/current#attendees'
+      end
     end
   end
-  get 'user', to: 'user/events#index'
 
+  get 'admin', to: 'admin/events#index'
   namespace :admin do
     resources :events, :places
   end
-  get 'admin', to: 'admin/events#index'
 
   root "user/events#index"
 end
