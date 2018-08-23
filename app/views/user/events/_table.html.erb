@@ -1,27 +1,25 @@
 <%- model_class = Event -%>
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:start_at) %></th>
-      <th><%= model_class.human_attribute_name(:end_at) %></th>
-      <th><%= model_class.human_attribute_name(:event_type) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
   <tbody>
     <% events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
-        <td><%= event.start_at_zoned_date %><br><%= event.start_at_zoned_time %></td>
-        <td><%= event.end_at_zoned_date %><br><%= event.end_at_zoned_time %></td>
-        <td><%= event.event_type %></td>
+        <td>
+          <div class='row'>
+            <div class='col-sm-4'>
+              <%= event.name %>
+            </div>
+            <div class='col-sm-4'>
+              <%= event.start_at_zoned_datetime %>
+            </div>
+            <div class='col-sm-4'>
+              <%= event.place.name %>
+            </div>
+          </div>
         <td>
           <% case event_action %>
           <% when :join %>
             <%= link_to "Join",
                         user_event_path(event), :class => 'btn btn-default btn-xs' %>
-            Join
           <% when :current %>
             <%= link_to "Goto",
                         user_current_event_path(id: event.id), :class => 'btn btn-default btn-xs' %>
