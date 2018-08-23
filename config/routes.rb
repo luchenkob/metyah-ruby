@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
   namespace :user do
-    resources :events, only: [:show, :index]
+    resources :events, only: [:show, :index] do
+      collection do
+        get 'my_events'
+        get 'join'
+        get 'search'
+      end
+    end
   end
   get 'user', to: 'user/events#index'
 
