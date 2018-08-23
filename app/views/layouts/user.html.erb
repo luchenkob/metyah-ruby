@@ -7,7 +7,11 @@
   </head>
     <body>
       <%= render partial: 'layouts/user/nav' %>
-      <%= render partial: 'layouts/user/events_nav' %>
+      <% if @current_event.present? %>
+        <%= render partial: 'layouts/user/current_nav' %>
+      <% else %>
+        <%= render partial: 'layouts/user/events_nav' %>
+      <% end %>
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
