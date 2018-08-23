@@ -65,6 +65,10 @@ class Event < ApplicationRecord
     start_at.in_time_zone(place.timezone)
   end
 
+  define_method(:my_method) do |foo, bar| # or even |*args|
+    # do something
+  end
+
   def start_at_zoned_date
     start_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
   end
@@ -121,7 +125,7 @@ class Event < ApplicationRecord
   end
 
   def display_profiles_starts_at
-    start_at + display_profiles_after_minutes.minutes
+    start_at_zoned + display_profiles_after_minutes.minutes
   end
 
   def display_profiles_ends_at
@@ -133,7 +137,7 @@ class Event < ApplicationRecord
   end
 
   def allow_messaging_starts_at
-    end_at + allow_messaging_after_minutes.minutes
+    end_at_zoned + allow_messaging_after_minutes.minutes
   end
 
   def allow_messaging_ends_at
@@ -144,4 +148,49 @@ class Event < ApplicationRecord
     allow_messaging_starts_at <= Time.current && Time.current <= allow_messaging_ends_at
   end
 
+  def allow_messaging_status_message
+    if Time.current < allow_messaging_starts_at
+      "Messaging will be allowed #{allow_messaging_starts_at_zoned_datetime}"
+    elsif Time.current > allow_messaging_ends_at
+      "Messaging expired #{allow_messaging_ends_at_zoned_datetime}"
+    else
+      "Messaging is allowed"
+    end
+  end
+
+
+  zoned_methods = [
+    :start_at, :end_at,
+    :display_profiles_starts_at, :display_profiles_ends_at,
+    :allow_messaging_starts_at, :allow_messaging_ends_at,
+  ]
+  zoned_methods.each do |zone_method|
+    # Defines the following instance helper methods
+    #   start_at_zoned, start_at_zoned_date, start_at_zoned_time, start_at_zoned_datetime
+    #   end_at_zoned, end_at_zoned_date, end_at_zoned_time, end_at_zoned_datetime
+    #   display_profiles_starts_at_zoned, display_profiles_starts_at_zoned_date,
+    #     display_profiles_starts_at_zoned_time, display_profiles_starts_at_zoned_datetime
+    #   display_profiles_ends_at_zoned, display_profiles_ends_at_zoned_date,
+    #     display_profiles_ends_at_zoned_time, display_profiles_ends_at_zoned_datetime
+    #   allow_messaging_starts_at_zone, allow_messaging_starts_at_zoned_date,
+    #     allow_messaging_starts_at_zoned_time, allow_messaging_starts_at_zoned_datetime
+    #   allow_messaging_ends_at_zoned, allow_messaging_ends_at_zoned_date,
+    #     allow_messaging_ends_at_zoned_time, allow_messaging_ends_at_zoned_datetime
+
+    define_method("#{zone_method}_zoned") do
+      send(zone_method).in_time_zone(place.timezone)
+    end
+
+    define_method("#{zone_method}_zoned_date") do
+      send(zone_method).in_time_zone(place.timezone).strftime("#{place.date_format}")
+    end
+
+    define_method("#{zone_method}_zoned_time") do
+      start_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
+    end
+
+    define_method("#{zone_method}_zoned_datetime") do
+      start_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
+    end
+  end
 end
