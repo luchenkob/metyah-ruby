@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :user do
+    get 'profile/profile'
+    get 'profile/settings'
+    get 'profile/messages'
+  end
   devise_for :users
   get 'user/events/current', to: 'user/events/current#attendees'
 
