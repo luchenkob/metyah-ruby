@@ -1,5 +1,5 @@
 <%# Renders page specific nav %>
-<% if @current_event.present? %>
+<% if active_navigation?("current") %>
   <%= render partial: 'layouts/user/dynamic_nav/current_nav' %>
 <% elsif active_navigation?("profile") %>
   <%= render partial: 'layouts/user/dynamic_nav/profile_nav' %>

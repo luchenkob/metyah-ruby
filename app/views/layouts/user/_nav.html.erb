@@ -9,11 +9,14 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class='nav-item <%= active_navigation?("current") %>'>
+          <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
+        </li>
         <li class='nav-item <%= active_navigation?("events") %>'>
           <%= link_to "Events", user_events_path, class: "nav-link"  %>
         </li>
-        <li class='nav-item <%= active_navigation?("current") %>'>
-          <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
+        <li class='nav-item <%= active_navigation?("profile", "profile") %>'>
+          <%= link_to 'Account', user_profile_path, class: "nav-link"  %>
         </li>
       </ul>
       <ul class="navbar-nav mr-auto">
