@@ -1,0 +1,9 @@
+<%# Renders page specific nav %>
+<% if @current_event.present? %>
+  <%= render partial: 'layouts/user/dynamic_nav/current_nav' %>
+<% elsif active_navigation?("profile") %>
+  <%= render partial: 'layouts/user/dynamic_nav/profile_nav' %>
+<% elsif active_navigation?("events") %>
+  <%= render partial: 'layouts/user/dynamic_nav/events_nav' %>
+<% end %>
+<br>

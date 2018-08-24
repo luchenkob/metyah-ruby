@@ -1,0 +1,14 @@
+<ul class="nav nav-pills nav-pills-primary justify-content-center">
+  <li class='nav-item'>
+    <%= link_to "Profile", user_profile_path,
+                class: "nav-link #{active_navigation?("profile", "profile")}"  %>
+  </li>
+  <li class='nav-item'>
+    <%= link_to "Settings", user_profile_settings_path,
+                class: "nav-link #{active_navigation?("profile", "settings")}"  %>
+  </li>
+  <li class='nav-item'>
+    <%= link_to "Messages", user_profile_messages_path,
+                class: "nav-link #{active_navigation?("profile", "messages")}"  %>
+  </li>
+</ul>

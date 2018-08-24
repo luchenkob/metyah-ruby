@@ -1,4 +1,4 @@
-class User::ProfileController < ApplicationController
+class User::ProfileController < UserController
   def profile
   end
 
