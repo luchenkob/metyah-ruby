@@ -18,6 +18,15 @@
         <li class='nav-item <%= active_navigation?("profile", "profile") %>'>
           <%= link_to 'Account', user_profile_path, class: "nav-link"  %>
         </li>
+        <% if user_signed_in? %>
+          <li class='nav-item'>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class='nav-item'>
+            <%= link_to 'Login', new_user_session_path, class: "nav-link"  %>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav mr-auto">
         <form class="form-inline ml-auto" data-background-color>
@@ -26,7 +35,6 @@
             </div>
         </form>
       </ul>
-      <%= render partial: 'layouts/user/nav/user_subnav' %>
     </div>
   </div>
 </nav>
