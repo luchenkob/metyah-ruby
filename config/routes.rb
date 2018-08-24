@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   get 'user/events/current', to: 'user/events/current#attendees'
 
 
