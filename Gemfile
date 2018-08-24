@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-rails'
 
+gem 'devise'
+gem 'devise-bootstrap-views', '~> 1.0'
+
 # For Bootstrap 3 scaffolds, which can be relatively easily converted to Bootstrap 4
 # Do not run any generator other than "rails g bootstrap:layout [LAYOUT_NAME]"
 gem 'twitter-bootstrap-rails'
