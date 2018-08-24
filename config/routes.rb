@@ -4,11 +4,17 @@ Rails.application.routes.draw do
   get 'user/events/current', to: 'user/events/current#attendees'
 
 
+
+  get 'user/profile' => 'user/profile#profile', as: :user_profile
+  get 'user/profile/settings' => 'user/profile#settings', as: :user_profile_settings
+  get 'user/profile/messages' => 'user/profile#messages', as: :user_profile_messages
+
   # These don't seem to like namespacing much
   get 'user/events/current/:id/attendees' => 'user/events/current#attendees', as: :attendees_user_current_event
   get 'user/events/current/:id/favorites' => 'user/events/current#favorites', as: :favorites_user_current_event
   get 'user/events/current/:id/inbox' => 'user/events/current#inbox', as: :inbox_user_current_event
   get 'user/events/current/:id' => 'user/events/current#inbox', as: :user_current_event
+
 
   get 'user', to: 'user/events#index'
   namespace :user do
