@@ -23,17 +23,7 @@
             </div>
         </form>
       </ul>
-      <ul class="navbar-nav mr-auto">
-        <% if user_signed_in? %>
-          <li class='nav-item <%= active_navigation?("events") %>'>
-            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
-          </li>
-        <% else %>
-          <li class='nav-item <%= active_navigation?("current") %>'>
-            <%= link_to 'Login', new_user_session_path, class: "nav-link"  %>
-          </li>
-        <% end %>
-      </ul>
+      <%= render partial: 'layouts/user/nav/user_subnav' %>
     </div>
   </div>
 </nav>
