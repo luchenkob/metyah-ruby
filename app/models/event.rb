@@ -56,7 +56,7 @@ class Event < ApplicationRecord
   end
 
   def self.find_by_code(entered_code)
-    where(code: entered_code)
+    find_by(code: entered_code)
   end
 
   def set_default_values
@@ -135,7 +135,9 @@ class Event < ApplicationRecord
     end
     required_solution_space = 2 * num_events + 1
 
-    (required_solution_space ** (1.0 / CODE_CHARACTERS.size.to_f)).ceil
+
+    required = Math.log(required_solution_space,CODE_CHARACTERS.size).ceil + 3
+    required
   end
 
   def generate_code
