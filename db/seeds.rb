@@ -18,7 +18,11 @@ Place.create(
 
 puts "Seeding Events"
 
-events = 5.times.map  { FactoryBot.create(:event) }
+events = 2.times.map  { FactoryBot.create(:event, :current_event) }
+events += 5.times.map  { FactoryBot.create(:event, :past_event) }
+events += 5.times.map  { FactoryBot.create(:event, :upcoming_event) }
+
+puts "Seeding Event Users"
 
 events.each do |event|
   FactoryBot.create(:event_user, event_id: event.id)

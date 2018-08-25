@@ -33,6 +33,32 @@ class Event < ApplicationRecord
   EVENT_TYPES = [EVENT_TYPE_SPEED_DATING, EVENT_TYPE_MIXER, EVENT_TYPE_NETWORKING, EVENT_TYPE_OTHER].freeze
   validates :event_type, :inclusion => { :in => Event::EVENT_TYPES }
 
+  def self.past
+    where(end_at: Time.at(0)..Time.current)
+  end
+
+  def self.current
+    puts where(
+      start_at: Time.current..DateTime::Infinity.new,
+    ).ids.inspect
+    puts where(
+      end_at: Time.at(0)..Time.current,
+    ).ids.inspect
+    where(
+      start_at: Time.current..DateTime::Infinity.new,
+      end_at: Time.at(0)..Time.current,
+    )
+    where.not(id: past.ids + upcoming.ids)
+  end
+
+  def self.upcoming
+    where(start_at: Time.current..DateTime::Infinity.new)
+  end
+
+  def self.find_by_code(entered_code)
+    where(code: entered_code)
+  end
+
   def set_default_values
     # Defaults are not intended to be valid, only sensible.
     # With defaults Model.create should always fail.
@@ -104,7 +130,9 @@ class Event < ApplicationRecord
 
   def self.code_digits_required(num_events = 0)
     # Require enough digits to ensure less than 50% probability of collision
-    num_events = num_events || Event.all.size
+    if num_events == 0
+      num_events = Event.all.size
+    end
     required_solution_space = 2 * num_events + 1
 
     (required_solution_space ** (1.0 / CODE_CHARACTERS.size.to_f)).ceil
@@ -120,6 +148,8 @@ class Event < ApplicationRecord
 
       return new_code unless existing_codes.include?(new_code)
     end
+
+    puts "NO unique code could be generated"
 
     no_code
   end

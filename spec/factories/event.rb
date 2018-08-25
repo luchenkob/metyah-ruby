@@ -15,17 +15,49 @@ FactoryBot.define do
     allow_messaging_after_minutes  { Faker::Number.between(1, 5) * 15 }
     allow_messaging_for_minutes    { Faker::Number.between(1, 5) * 150 }
 
-    start_end_at do
-      start_at, end_at = [
-        Faker::Time.forward(30),Faker::Time.forward(30)
-      ]
-      .map { |datetime| datetime.in_time_zone(place.timezone).strftime("%m/%d/%Y %H:%M %p") }
-      .sort
+    sequence(:name) { |n| "Autogen Event ##{n}" }
 
-      "#{start_at} - #{end_at}"
+    upcoming_event
+
+    trait :past_event do
+      start_end_at do
+        start_at, end_at = [
+          Faker::Time.backward(30),Faker::Time.backward(30)
+        ]
+        .map { |datetime| datetime.in_time_zone(place.timezone).strftime("%m/%d/%Y %H:%M %p") }
+        .sort
+
+        "#{start_at} - #{end_at}"
+      end
     end
 
-    sequence(:name) { |n| "Autogen Event ##{n}" }
+    trait :random_event do
+      start_end_at do
+        start_at, end_at = [Faker::Time.backward(30), Faker::Time.forward(30)]
+        .map { |datetime| datetime.in_time_zone(place.timezone).strftime("%m/%d/%Y %H:%M %p") }
+
+        "#{start_at} - #{end_at}"
+      end
+    end
+
+    trait :current_event do
+      start_end_at do
+        start_at, end_at = [Faker::Time.backward(1), Faker::Time.forward(1)]
+        .map { |datetime| datetime.in_time_zone(place.timezone).strftime("%m/%d/%Y %H:%M %p") }
+
+        "#{start_at} - #{end_at}"
+      end
+    end
+
+    trait :upcoming_event do
+      start_end_at do
+        start_at, end_at = [Faker::Time.forward(30), Faker::Time.forward(30)]
+        .map { |datetime| datetime.in_time_zone(place.timezone).strftime("%m/%d/%Y %H:%M %p") }
+        .sort
+
+        "#{start_at} - #{end_at}"
+      end
+    end
   end
 end
 
