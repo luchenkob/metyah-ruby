@@ -129,12 +129,11 @@ class Event < ApplicationRecord
   end
 
   def self.code_digits_required(num_events = 0)
-    # Require enough digits to ensure less than 50% probability of collision
+    # Require enough digits to ensure very low probability of collision
     if num_events == 0
       num_events = Event.all.size
     end
     required_solution_space = 2 * num_events + 1
-
 
     required = Math.log(required_solution_space,CODE_CHARACTERS.size).ceil + 3
     required
