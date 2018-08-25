@@ -33,6 +33,26 @@ class Event < ApplicationRecord
   EVENT_TYPES = [EVENT_TYPE_SPEED_DATING, EVENT_TYPE_MIXER, EVENT_TYPE_NETWORKING, EVENT_TYPE_OTHER].freeze
   validates :event_type, :inclusion => { :in => Event::EVENT_TYPES }
 
+  def self.past
+    where(start_at: -DateTime::Infinity.new..Event.time_current_zoned)
+  end
+
+  def self.current
+    where(
+      start_at: Event.time_current_zoned..DateTime::Infinity.new,
+      end_at: -DateTime::Infinity.new..Event.time_current_zoned,
+    )
+    where(end_at: Event.time_current_zoned..DateTime::Infinity.new)
+  end
+
+  def self.upcoming
+    where(end_at: Event.time_current_zoned..DateTime::Infinity.new)
+  end
+
+  def self.find_by_code(entered_code)
+    where(code: entered_code)
+  end
+
   def set_default_values
     # Defaults are not intended to be valid, only sensible.
     # With defaults Model.create should always fail.
