@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Seeding Places"
 Place.create(
   name: "Calgary, AB, Canada",
   tax_rate: 0.05,
@@ -13,4 +14,7 @@ Place.create(
   currency: "CAN",
   date_format: '%m/%d/%Y',
   time_format: '%I:%M %p',
-)
+) unless Place.find_by(name: "Calgary, AB, Canada").present?
+
+puts "Seeding Users"
+100.times { FactoryBot.create(:user) } unless User.all.size > 10
