@@ -9,10 +9,16 @@ class User::EventsController < UserController
   end
 
   def my_events
-    @events = Event.all
+    @events = current_user.events
   end
 
   def join
+    @event = Event.find_by_code(params[:code])
+    if @event.present? && current_user.present?
+      EventUser.create(event_id: @event.id, user_id: current_user.id)
+      flash[:success] = "You have joined this event"
+      redirect_to my_events_user_events_path
+    end
   end
 
   def search

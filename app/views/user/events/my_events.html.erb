@@ -8,6 +8,32 @@
 <div class="card">
   <h2 class="card-title text-center">Upcoming</h2>
   <div class="card-body">
+    <%= render partial: "user/events/table", locals: { events: @events.upcoming, event_action: :show } %>
+  </div>
+</div>
+<br>
+<div class="card">
+  <h2 class="card-title text-center">Past</h2>
+  <div class="card-body">
+    <%= render partial: "user/events/table", locals: { events: @events.past, event_action: :review } %>
+  </div>
+</div>
+
+
+<h1>All Events (Temp, displayed for reference only)</h1>
+
+<% @events = Event.all %>
+
+<div class="card">
+  <h2 class="card-title text-center">Current</h2>
+  <div class="card-body">
+    <%= render partial: "user/events/table", locals: { events: @events.current, event_action: :current } %>
+  </div>
+</div>
+<br>
+<div class="card">
+  <h2 class="card-title text-center">Upcoming</h2>
+  <div class="card-body">
     <%= render partial: "user/events/table", locals: { events: @events.upcoming, event_action: :join } %>
   </div>
 </div>
