@@ -3,6 +3,9 @@ class Event < ApplicationRecord
   before_validation :set_code, unless: Proc.new { |event| event.code.present? }
   before_save :split_start_end_at
 
+  has_many :event_users, dependent: :destroy
+  has_many :users, through: :event_users
+
   belongs_to :place
 
   validates :code, presence: true, uniqueness: true
@@ -49,9 +52,6 @@ class Event < ApplicationRecord
 
   def split_start_end_at
     # Expected format of start_end_at: 08/18/2018 3:56 PM - 08/18/2018 3:56 PM
-    # - Todo: Add timezone handling
-    puts "start_end_at: #{start_end_at}"
-
     self.start_at, self.end_at = self
     .start_end_at
     .split(" - ")
