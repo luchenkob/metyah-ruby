@@ -50,6 +50,7 @@
       <div class="form-group row">
         <%= f.label :gender, :class => 'control-label col-lg-2' %>
         <div class="col-lg-10">
+          <%= f.select :gender, User::GENDERS, {}, { :class => 'form-control' } %>
           <%= f.text_field :gender, :class => 'form-control' %>
         </div>
         <%=f.error_span(:gender) %>
