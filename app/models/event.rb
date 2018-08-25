@@ -3,6 +3,9 @@ class Event < ApplicationRecord
   before_validation :set_code, unless: Proc.new { |event| event.code.present? }
   before_save :split_start_end_at
 
+  has_many :event_users, dependent: :destroy
+  has_many :users, through: :event_users
+
   belongs_to :place
 
   validates :code, presence: true, uniqueness: true
