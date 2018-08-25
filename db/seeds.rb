@@ -16,5 +16,10 @@ Place.create(
   time_format: '%I:%M %p',
 ) unless Place.find_by(name: "Calgary, AB, Canada").present?
 
-puts "Seeding Users"
-100.times { FactoryBot.create(:user) } unless User.all.size > 10
+puts "Seeding Events"
+
+events = 5.times.map  { FactoryBot.create(:event) }
+
+events.each do |event|
+  FactoryBot.create(:event_user, event_id: event.id)
+end
