@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   get 'user/events/current', to: 'user/events/current#attendees'
 
-
-
   get 'user/profile' => 'user/profile#profile', as: :user_profile
   get 'user/profile/settings' => 'user/profile#settings', as: :user_profile_settings
   get 'user/profile/messages' => 'user/profile#messages', as: :user_profile_messages
@@ -22,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         get 'my_events'
         get 'join'
+        post 'join'
         get 'search'
       end
     end
