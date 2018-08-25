@@ -34,19 +34,25 @@ class Event < ApplicationRecord
   validates :event_type, :inclusion => { :in => Event::EVENT_TYPES }
 
   def self.past
-    where(start_at: -DateTime::Infinity.new..Event.time_current_zoned)
+    where(end_at: Time.at(0)..Time.current)
   end
 
   def self.current
+    puts where(
+      start_at: Time.current..DateTime::Infinity.new,
+    ).ids.inspect
+    puts where(
+      end_at: Time.at(0)..Time.current,
+    ).ids.inspect
     where(
-      start_at: Event.time_current_zoned..DateTime::Infinity.new,
-      end_at: -DateTime::Infinity.new..Event.time_current_zoned,
+      start_at: Time.current..DateTime::Infinity.new,
+      end_at: Time.at(0)..Time.current,
     )
-    where(end_at: Event.time_current_zoned..DateTime::Infinity.new)
+    where.not(id: past.ids + upcoming.ids)
   end
 
   def self.upcoming
-    where(end_at: Event.time_current_zoned..DateTime::Infinity.new)
+    where(start_at: Time.current..DateTime::Infinity.new)
   end
 
   def self.find_by_code(entered_code)
@@ -124,7 +130,9 @@ class Event < ApplicationRecord
 
   def self.code_digits_required(num_events = 0)
     # Require enough digits to ensure less than 50% probability of collision
-    num_events = num_events || Event.all.size
+    if num_events == 0
+      num_events = Event.all.size
+    end
     required_solution_space = 2 * num_events + 1
 
     (required_solution_space ** (1.0 / CODE_CHARACTERS.size.to_f)).ceil
@@ -140,6 +148,8 @@ class Event < ApplicationRecord
 
       return new_code unless existing_codes.include?(new_code)
     end
+
+    puts "NO unique code could be generated"
 
     no_code
   end
