@@ -3,9 +3,40 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= bootstrap_devise_error_messages! %>
 
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+  <div class="form-group row">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:email) %>
+  </div>
+  <div class="form-group row">
+    <%= f.label :first_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :first_name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:first_name) %>
+  </div>
+  <div class="form-group row">
+    <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :last_name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:last_name) %>
+  </div>
+  <div class="form-group row">
+    <%= f.label :birthdate, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :birthdate, :class => 'form-control calentim col-lg-10' %>
+    </div>
+    <%=f.error_span(:birthdate) %>
+  </div>
+  <div class="form-group row">
+    <%= f.label :gender, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :gender, User::GENDERS, {}, { :class => 'form-control' } %>
+    </div>
+    <%=f.error_span(:gender) %>
   </div>
 
   <div class="form-group">
@@ -28,3 +59,18 @@
 <% end %>
 
 <%= render 'devise/shared/links' %>
+
+<%= render partial: "layouts/shared/calentim_includes"%>
+<script>
+  var calentimOptions = {
+    maxDate: moment("<%= (Time.current - 18.years).to_date %>", "YYYY-MM-DD"),
+    showHeader: false, // Hide selected dates
+    showFooter: false, // Hide ranges
+    singleDate: true, // No date range
+    showTimePickers: false, // Date only
+    calendarCount: 1, // Only show a single calendar
+    format: "YYYY/MM/DD", // A more easily parsed format
+  };
+
+  $(".calentim").calentim(calentimOptions);
+</script>

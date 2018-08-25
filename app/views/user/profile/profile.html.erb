@@ -1,2 +1,118 @@
-<h1>User::Profile#profile</h1>
-<p>Find me in app/views/user/profile/profile.html.erb</p>
+<%= form_for @user, :html => { :class => "form-horizontal user" } do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Personal</h2>
+
+      <div class="form-group row">
+        <%= f.label :email, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :email, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:email) %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :first_name, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :first_name, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:first_name) %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :last_name, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:last_name) %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :birthdate, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :birthdate, :class => 'form-control calentim col-lg-10' %>
+        </div>
+        <%=f.error_span(:birthdate) %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :gender, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.select :gender, User::GENDERS, {}, { :class => 'form-control' } %>
+          <%= f.text_field :gender, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:gender) %>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Other</h2>
+
+      <div class="form-group row">
+        <%= f.label :career, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :career, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:career) %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :school, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :school, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:school) %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :location, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :location, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:location) %>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :bio, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_area :bio, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:bio) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Save", :class => 'btn btn-primary' %>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+  var calentimOptions = {
+    maxDate: moment("<%= (Time.current - 18.years).to_date %>", "YYYY-MM-DD"),
+    showHeader: false, // Hide selected dates
+    showFooter: false, // Hide ranges
+    singleDate: true, // No date range
+    showTimePickers: false, // Date only
+    calendarCount: 1, // Only show a single calendar
+  };
+
+  $(".calentim").calentim(calentimOptions);
+</script>
