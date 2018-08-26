@@ -2,6 +2,7 @@ class User::Events::CurrentController < UserController
   before_action :set_current_event
 
   def attendees
+    @event_users = @current_event.event_users
   end
 
   def favorites

@@ -16,4 +16,10 @@ class User < ApplicationRecord
   GENDERS = [GENDER_MALE, GENDER_FEMALE]
   validates :gender, :inclusion => { :in => User::GENDERS }
 
+  def age
+    # Source: https://medium.com/@craigsheen/calculating-age-in-rails-9bb661f11303
+    # May be slightly off based on timezone
+    ((Time.current - birthdate.to_time) / 1.year.seconds).floor
+  end
+
 end
