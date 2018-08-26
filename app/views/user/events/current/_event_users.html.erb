@@ -1,0 +1,20 @@
+<% model_class = User %>
+<div class='row'>
+  <% event_users.each.with_index do |event_user, index| %>
+    <% user = event_user.user %>
+    <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
+      <div class="card-body">
+        <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
+        <dl class="dl-horizontal row">
+          <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
+          <dd class="col-7"><%= user.career %></dd>
+          <dt class="col-5"><strong><%= model_class.human_attribute_name(:school) %>:</strong></dt>
+          <dd class="col-7"><%= user.school %></dd>
+          <dt class="col-5"><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
+          <dd class="col-7"><%= user.location %></dd>
+        </dl>
+        This is some text within a card body.
+      </div>
+    </div>
+  <% end %>
+</div>

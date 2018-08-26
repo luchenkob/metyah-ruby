@@ -1,2 +1,18 @@
-<h1>User::Events::Current#attendees</h1>
-<p>Find me in app/views/user/events/current/attendees.html.erb</p>
+<% if @current_event.display_profiles? %>
+  <div class="alert alert-success col-12" role="alert">
+    Profiles are now visible
+  </div>
+<% else %>
+  <div class="alert alert-danger col-12" role="alert">
+    Profiles will be visible at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
+  </div>
+<% end %>
+
+<%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
+
+<h2>
+  All Event Users<br>
+  <small>(TEMP DEMO ONLY)</small>
+</h2>
+
+<%= render partial: 'user/events/current/event_users', locals: { event_users: EventUser.all } %>
