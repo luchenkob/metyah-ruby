@@ -1,8 +1,18 @@
 <% model_class = User %>
 <div class='row'>
-  <% @event_users.each do |event_user| %>
+  <% if @current_event.display_profiles? %>
+    <div class="alert alert-success col-12" role="alert">
+      Profiles are now visible
+    </div>
+  <% else %>
+    <div class="alert alert-danger col-12" role="alert">
+      Profiles will be visible at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
+    </div>
+  <% end %>
+  <div></div>
+  <% @event_users.each.with_index do |event_user, index| %>
     <% user = event_user.user %>
-    <div class="card col-md-5 offset-md-1">
+    <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
         <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
         <dl class="dl-horizontal row">
@@ -26,9 +36,9 @@
 
 <% model_class = User %>
 <div class='row'>
-  <% EventUser.all.each do |event_user| %>
+  <% EventUser.all.each.with_index do |event_user, index| %>
     <% user = event_user.user %>
-    <div class="card col-md-5 offset-md-1">
+    <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
         <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
         <dl class="dl-horizontal row">
