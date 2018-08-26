@@ -6,6 +6,7 @@ class User::Events::CurrentController < UserController
   end
 
   def favorites
+    @event_users = @current_event.event_users
   end
 
   def inbox
