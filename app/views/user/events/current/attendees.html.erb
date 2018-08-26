@@ -1,56 +1,18 @@
-<% model_class = User %>
-<div class='row'>
-  <% if @current_event.display_profiles? %>
-    <div class="alert alert-success col-12" role="alert">
-      Profiles are now visible
-    </div>
-  <% else %>
-    <div class="alert alert-danger col-12" role="alert">
-      Profiles will be visible at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
-    </div>
-  <% end %>
-  <div></div>
-  <% @event_users.each.with_index do |event_user, index| %>
-    <% user = event_user.user %>
-    <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
-      <div class="card-body">
-        <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
-        <dl class="dl-horizontal row">
-          <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
-          <dd class="col-7"><%= user.career %></dd>
-          <dt class="col-5"><strong><%= model_class.human_attribute_name(:school) %>:</strong></dt>
-          <dd class="col-7"><%= user.school %></dd>
-          <dt class="col-5"><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
-          <dd class="col-7"><%= user.location %></dd>
-        </dl>
-        This is some text within a card body.
-      </div>
-    </div>
-  <% end %>
-</div>
+<% if @current_event.display_profiles? %>
+  <div class="alert alert-success col-12" role="alert">
+    Profiles are now visible
+  </div>
+<% else %>
+  <div class="alert alert-danger col-12" role="alert">
+    Profiles will be visible at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
+  </div>
+<% end %>
+
+<%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
 
 <h2>
   All Event Users<br>
   <small>(TEMP DEMO ONLY)</small>
 </h2>
 
-<% model_class = User %>
-<div class='row'>
-  <% EventUser.all.each.with_index do |event_user, index| %>
-    <% user = event_user.user %>
-    <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
-      <div class="card-body">
-        <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
-        <dl class="dl-horizontal row">
-          <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
-          <dd class="col-7"><%= user.career %></dd>
-          <dt class="col-5"><strong><%= model_class.human_attribute_name(:school) %>:</strong></dt>
-          <dd class="col-7"><%= user.school %></dd>
-          <dt class="col-5"><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
-          <dd class="col-7"><%= user.location %></dd>
-        </dl>
-        This is some text within a card body.
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render partial: 'user/events/current/event_users', locals: { event_users: EventUser.all } %>
