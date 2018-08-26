@@ -11,7 +11,8 @@
 <div class="card">
   <h2 class="card-title text-center">Results</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events, event_action: :join } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.upcoming, event_action: :modal, event_action_label: "Details" } %>
   </div>
 </div>
 <br>

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get 'my_events'
         get 'join'
         post 'join'
+        post 'modal'
         get 'search'
       end
     end

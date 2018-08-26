@@ -1,21 +1,24 @@
 <div class="card">
   <h2 class="card-title text-center">Current</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events.current, event_action: :current } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.current, event_action: :current, event_action_label: "Goto" } %>
   </div>
 </div>
 <br>
 <div class="card">
   <h2 class="card-title text-center">Upcoming</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events.upcoming, event_action: :show } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.upcoming, event_action: :modal, event_action_label: "Show" } %>
   </div>
 </div>
 <br>
 <div class="card">
   <h2 class="card-title text-center">Past</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events.past, event_action: :review } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.past, event_action: :show, event_action_label: "Review" } %>
   </div>
 </div>
 
@@ -30,20 +33,23 @@
 <div class="card">
   <h2 class="card-title text-center">Current</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events.current, event_action: :current } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.current, event_action: :current, event_action_label: "Goto" } %>
   </div>
 </div>
 <br>
 <div class="card">
   <h2 class="card-title text-center">Upcoming</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events.upcoming, event_action: :join } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.upcoming, event_action: :show, event_action_label: "Join" } %>
   </div>
 </div>
 <br>
 <div class="card">
   <h2 class="card-title text-center">Past</h2>
   <div class="card-body">
-    <%= render partial: "user/events/table", locals: { events: @events.past, event_action: :review } %>
+    <%= render partial: "user/events/table",
+               locals: { events: @events.past, event_action: :show, event_action_label: "Review" } %>
   </div>
 </div>

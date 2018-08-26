@@ -1,5 +1,5 @@
 class User::EventsController < UserController
-  before_action :set_event, only: [:show]
+  before_action :set_event, only: [:show, :modal]
 
   def index
     redirect_to my_events_user_events_path
@@ -23,6 +23,12 @@ class User::EventsController < UserController
 
   def search
     @events = Event.all
+  end
+
+  def modal
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
