@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profile_photos, only: [:create]
   devise_for :users
   get 'user/events/current', to: 'user/events/current#attendees'
 

@@ -2,9 +2,9 @@
   <div class="col-lg-4 offset-lg-4">
     <% if user&.photo&.present?  %>
       <img alt="Icon" src="<%= profile_photo_url_for(@user) %>" class='img-fluid' />
-      <%= f.label :email, 'Change Photo', :class => 'control-label' %>
+      <%= f.label :photo, 'Change Photo', :class => 'control-label' %>
     <% else %>
-      <%= f.label :email, 'Select Photo', :class => 'control-label' %>
+      <%= f.label :photo, 'Select Photo', :class => 'control-label' %>
     <% end %>
 
     <%= f.uploadcare_single_uploader_field :photo, :class => 'form-control',
