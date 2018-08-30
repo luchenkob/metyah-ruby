@@ -11,10 +11,11 @@
 <script>window.jQuery || document.write('<script src="js/jquery-2.1.4.min.js" type="text/javascript"><\/script>');
 </script>
 
-
 <%= javascript_include_tag "application" %>
 <%= render partial: "layouts/shared/calentim_includes"%>
 
+<%= include_uploadcare_widget_from_cdn version: "3.6.0", min: true %>
+<%= uploadcare_settings %>
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
 <!--[if lt IE 9]>
