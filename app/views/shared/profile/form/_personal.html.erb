@@ -1,0 +1,52 @@
+<div class="form-group row">
+  <div class="col-lg-4 offset-lg-4">
+    <% if user&.photo&.present?  %>
+      <img alt="Icon" src="<%= profile_photo_url_for(@user) %>" class='img-fluid' />
+      <%= f.label :email, 'Change Photo', :class => 'control-label' %>
+    <% else %>
+      <%= f.label :email, 'Select Photo', :class => 'control-label' %>
+    <% end %>
+
+    <%= f.uploadcare_single_uploader_field :photo, :class => 'form-control',
+                              data: { crop: "1:1 upscale", "images-only": "true" }, value: nil %>
+  </div>
+  <%=f.error_span(:photo) %>
+</div>
+
+<h2 class="card-title">Personal</h2>
+
+<div class="form-group row">
+  <%= f.label :email, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.text_field :email, :class => 'form-control' %>
+  </div>
+  <%=f.error_span(:email) %>
+</div>
+<div class="form-group row">
+  <%= f.label :first_name, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.text_field :first_name, :class => 'form-control' %>
+  </div>
+  <%=f.error_span(:first_name) %>
+</div>
+<div class="form-group row">
+  <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.text_field :last_name, :class => 'form-control' %>
+  </div>
+  <%=f.error_span(:last_name) %>
+</div>
+<div class="form-group row">
+  <%= f.label :birthdate, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.text_field :birthdate, :class => 'form-control calentim col-lg-10' %>
+  </div>
+  <%=f.error_span(:birthdate) %>
+</div>
+<div class="form-group row">
+  <%= f.label :gender, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.select :gender, User::GENDERS, {}, { :class => 'form-control' } %>
+  </div>
+  <%=f.error_span(:gender) %>
+</div>

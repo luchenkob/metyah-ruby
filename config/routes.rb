@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-
   devise_for :users
   get 'user/events/current', to: 'user/events/current#attendees'
 
   get 'user/profile' => 'user/profile#profile', as: :user_profile
   get 'user/profile/settings' => 'user/profile#settings', as: :user_profile_settings
   get 'user/profile/messages' => 'user/profile#messages', as: :user_profile_messages
+
+  resources :user, :controller=>:users, except: [:new, :create, :index]
 
   # These don't seem to like namespacing much
   get 'user/events/current/:id/attendees' => 'user/events/current#attendees', as: :attendees_user_current_event

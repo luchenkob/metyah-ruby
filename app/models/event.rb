@@ -82,8 +82,7 @@ class Event < ApplicationRecord
     .start_end_at
     .split(" - ")
     .map do |date|
-      DateTime
-      .strptime("#{date} #{place.timezone}", "%m/%d/%Y %H:%M %p %z")
+      DateTime.strptime("#{date} #{place.timezone}", "%m/%d/%Y %H:%M %p %z")
     end
   end
 

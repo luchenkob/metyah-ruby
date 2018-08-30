@@ -1,43 +1,12 @@
+<%# Doesn't work unless rendered first, and "content_for :head" not working eihter %>
+<%= render partial: "layouts/shared/uploadcare_includes" %>
+
 <h1><%= t('.sign_up') %></h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= bootstrap_devise_error_messages! %>
 
-  <div class="form-group row">
-    <%= f.label :email, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :email, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:email) %>
-  </div>
-  <div class="form-group row">
-    <%= f.label :first_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :first_name, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:first_name) %>
-  </div>
-  <div class="form-group row">
-    <%= f.label :last_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :last_name, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:last_name) %>
-  </div>
-  <div class="form-group row">
-    <%= f.label :birthdate, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :birthdate, :class => 'form-control calentim col-lg-10' %>
-    </div>
-    <%=f.error_span(:birthdate) %>
-  </div>
-  <div class="form-group row">
-    <%= f.label :gender, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.select :gender, User::GENDERS, {}, { :class => 'form-control' } %>
-    </div>
-    <%=f.error_span(:gender) %>
-  </div>
+  <%= render partial: 'shared/profile/form/personal', locals: {f: f, user: resource} %>
 
   <div class="form-group">
     <%= f.label :password %>
