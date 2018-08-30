@@ -19,10 +19,10 @@
     <div class="card-body">
       <div class="form-group row">
         <div class="col-lg-4 offset-lg-4">
-          <img alt="Icon" src="<%= @user.photo %>" />
+          <img alt="Icon" src="<%= profile_photo_url_for(@user) %>" class='img-fluid' />
           <%= f.label :email, 'Change Photo', :class => 'control-label' %>
           <%= f.uploadcare_single_uploader_field :photo, :class => 'form-control',
-                                    data: { crop: "350x350 upscale", "images-only": "true" }, value: nil %>
+                                    data: { crop: "1:1 upscale", "images-only": "true" }, value: nil %>
         </div>
         <%=f.error_span(:photo) %>
       </div>
