@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :event_users, dependent: :destroy
   has_many :events, through: :event_users
 
-  validates :email, :first_name, :last_name, :birthdate, :gender, presence: true
+  validates :email, :first_name, :last_name, :birthdate, :gender, :photo, presence: true
 
   validates :bio, length: { maximum: 150 }
 
@@ -20,8 +20,21 @@ class User < ApplicationRecord
   GENDERS = [GENDER_MALE, GENDER_FEMALE]
   validates :gender, :inclusion => { :in => User::GENDERS }
 
+  after_save :find_create_profile_photo # update profile photo user_id
+
+  has_many :profile_photos
+
   def standardize
     #self.birthdate = DateTime.strptime(birthdate, "%m/%d/%Y %H:%M %p")
+  end
+
+  def find_create_profile_photo
+    if photo.present?
+      profile_picture = ProfilePhoto.find_or_create_by(url: self.photo.to_s)
+      if !profile_picture.user_id.present?
+        profile_picture.update(user_id: id) if id.present?
+      end
+    end
   end
 
   def age
