@@ -13,9 +13,7 @@
 
 <%= javascript_include_tag "application" %>
 <%= render partial: "layouts/shared/calentim_includes"%>
-
-<%= include_uploadcare_widget_from_cdn version: "3.6.0", min: true %>
-<%= uploadcare_settings %>
+<%= render partial: "layouts/shared/uploadcare_includes"%>
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
 <!--[if lt IE 9]>
