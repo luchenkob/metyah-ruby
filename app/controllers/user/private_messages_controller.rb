@@ -1,26 +1,6 @@
 class User::PrivateMessagesController < ApplicationController
   before_action :set_user_private_message, only: [:show, :edit, :update, :destroy]
 
-  # GET /user/private_messages
-  # GET /user/private_messages.json
-  def index
-    @user_private_messages = User::PrivateMessage.all
-  end
-
-  # GET /user/private_messages/1
-  # GET /user/private_messages/1.json
-  def show
-  end
-
-  # GET /user/private_messages/new
-  def new
-    @user_private_message = User::PrivateMessage.new
-  end
-
-  # GET /user/private_messages/1/edit
-  def edit
-  end
-
   # POST /user/private_messages
   # POST /user/private_messages.json
   def create

@@ -1,9 +1,9 @@
-var eventsModal = $('#event-modal');
+var eventsModal = $('#modal');
 
 if (eventsModal.length > 0) {
   eventsModal.html("<%= j render(partial: 'user/events/modal') %>");
 } else {
-  console.log('#event-modal not found');
+  console.log('#modal not found');
 }
 eventsModal.modal({
   show: true

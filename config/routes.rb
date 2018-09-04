@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   namespace :user do
-    resources :private_messages
   end
   resources :profile_photos, only: [:create]
   devise_for :users
@@ -17,6 +16,8 @@ Rails.application.routes.draw do
   get 'user/events/current/:id/favorites' => 'user/events/current#favorites', as: :favorites_user_current_event
   get 'user/events/current/:id/inbox' => 'user/events/current#inbox', as: :inbox_user_current_event
   get 'user/events/current/:id' => 'user/events/current#inbox', as: :user_current_event
+  post 'user/events/current/:id/send' => 'user/events/current#message_send_modal', as: :user_current_message_send_modal
+  post 'user/events/current/:id/reply' => 'user/events/current#message_reply_modal', as: :user_current_message_reply_modal
 
 
   get 'user', to: 'user/events#index'
@@ -28,6 +29,13 @@ Rails.application.routes.draw do
         post 'join'
         post 'modal'
         get 'search'
+      end
+    end
+
+    resources :private_messages do
+      collection do
+        post 'message_reply_modal'
+        post 'message_send_modal'
       end
     end
   end

@@ -1,0 +1,11 @@
+var inboxModal = $('#modal');
+
+if (inboxModal.length > 0) {
+  inboxModal.html("<%= j render(partial: 'user/events/current/inbox/reply_modal') %>");
+} else {
+  console.log('#modal not found');
+}
+
+inboxModal.modal({
+  show: true
+});
