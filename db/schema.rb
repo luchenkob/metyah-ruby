@@ -120,9 +120,10 @@ ActiveRecord::Schema.define(version: 2018_09_04_031943) do
 
   create_table "user_private_messages", force: :cascade do |t|
     t.text "content"
+    t.text "message_intent"
+    t.bigint "event_id"
     t.bigint "sender_id"
     t.bigint "recipient_id"
-    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_user_private_messages_on_event_id"
