@@ -86,42 +86,6 @@ class Event < ApplicationRecord
     end
   end
 
-  def start_at_zoned
-    start_at.in_time_zone(place.timezone)
-  end
-
-  define_method(:my_method) do |foo, bar| # or even |*args|
-    # do something
-  end
-
-  def start_at_zoned_date
-    start_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
-  end
-
-  def start_at_zoned_time
-    start_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
-  end
-
-  def start_at_zoned_datetime
-    start_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
-  end
-
-  def end_at_zoned
-    end_at.in_time_zone(place.timezone)
-  end
-
-  def end_at_zoned_date
-    end_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
-  end
-
-  def end_at_zoned_time
-    end_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
-  end
-
-  def end_at_zoned_datetime
-    end_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
-  end
-
   def set_code
     # Use devise for
     self.code = generate_code

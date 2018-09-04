@@ -10,7 +10,8 @@ class User::Events::CurrentController < UserController
   end
 
   def inbox
-    @messages = User::PrivateMessage.where(recipient_id: current_user.id)
+    @messages = User::PrivateMessage.all
+    #@messages = User::PrivateMessage.where(recipient_id: current_user.id)
   end
 
   private

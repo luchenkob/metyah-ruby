@@ -122,8 +122,10 @@ ActiveRecord::Schema.define(version: 2018_09_04_031943) do
     t.text "content"
     t.bigint "sender_id"
     t.bigint "recipient_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_user_private_messages_on_event_id"
     t.index ["recipient_id"], name: "index_user_private_messages_on_recipient_id"
     t.index ["sender_id"], name: "index_user_private_messages_on_sender_id"
   end
@@ -156,6 +158,7 @@ ActiveRecord::Schema.define(version: 2018_09_04_031943) do
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "profile_photos", "users"
+  add_foreign_key "user_private_messages", "events"
   add_foreign_key "user_private_messages", "users", column: "recipient_id"
   add_foreign_key "user_private_messages", "users", column: "sender_id"
 end

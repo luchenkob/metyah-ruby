@@ -1,0 +1,24 @@
+<% model_class = User::PrivateMessage %>
+<div class='row'>
+  <% @messages.each.with_index do |message, index| %>
+    <% sender = message.sender %>
+    <div class="card">
+      <div class="card-body">
+        <div class='row'>
+          <div class='col-md-3'>
+
+            <img alt="Thumb" src="<%= thumb_photo_url_for(sender) %>" class='img-fluid' />
+          </div>
+          <div class='col-md-6'>
+            <h4 class="card-title"><%= sender.first_name %></h4>
+            <p><%= message.content %></p>
+          </div>
+          <div class='col-md-3 text-center'>
+            <%= link_to "Reply", "#", class: 'btn btn-primary' %><br>
+            <%= datetime_zoned_datetime(message.created_at, message.event.place) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

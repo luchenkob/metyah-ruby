@@ -4,6 +4,7 @@ class CreateUserPrivateMessages < ActiveRecord::Migration[5.2]
       t.text :content
       t.references :sender
       t.references :recipient
+      t.references :event, foreign_key: true
 
       t.timestamps
     end
