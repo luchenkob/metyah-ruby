@@ -1,6 +1,7 @@
 defaults: &defaults
-  public_key: <%= ENV["UPLOADCARE_PUBLIC_KEY"] %> # replace it with your public key
-  private_key: <%= ENV["UPLOADCARE_PRIVATE_KEY"] %> # replace it with your private key
+  public_key: <%= ENV["UPLOADCARE_PUBLIC_KEY"] || "demopublickey" %>
+  private_key: <%= ENV["UPLOADCARE_PRIVATE_KEY"] || "demoprivatekey" %>
+
 
   # instances of widget initialized for you on page load
   live: true
