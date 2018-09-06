@@ -1,5 +1,6 @@
 module UsersHelper
   def photo_url_for(user, dimensions, filename)
+    return "" unless user.photo.present?
     "#{user.photo}-/scale_crop/#{dimensions}/center/#{filename}"
   end
 
