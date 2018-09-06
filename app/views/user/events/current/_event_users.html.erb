@@ -7,7 +7,17 @@
         <h4 class="card-title">
           <%= user.first_name %>, <%= event_user.user_age_zoned %>
           <span class='pull-right'>
-            <i class="now-ui-icons ui-1_email-85"></i>
+              <%= form_with url: user_current_message_modal_path do |f| %>
+                <%= f.hidden_field :id, value: event_user.event.id %>
+                <%= f.hidden_field :send_to_id, value: user.id %>
+                <div class="form-group">
+                  <%= button_tag(type: "submit", class: "btn btn-link") do %>
+                    <span><i class="now-ui-icons ui-1_email-85"></i></span>
+                  <% end %>
+                </div>
+              <% end %>
+
+
           </span>
         </h4>
         <dl class="dl-horizontal row">
