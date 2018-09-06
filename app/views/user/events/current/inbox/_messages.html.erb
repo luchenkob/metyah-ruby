@@ -21,9 +21,9 @@
           </div>
           <div class='col-md-3 text-center'>
             <% if current_user == message.recipient %>
-              <%= form_with url: user_current_message_reply_modal_path do |f| %>
+              <%= form_with url: user_current_message_modal_path do |f| %>
                 <%= f.hidden_field :id, value: @current_event.id %>
-                <%= f.hidden_field :reply_to_id, value: sender.id %>
+                <%= f.hidden_field :send_to_id, value: sender.id %>
                 <div class="form-group">
                   <%= f.submit "Reply", :class => 'btn btn-primary btn-round' %>
                 </div>

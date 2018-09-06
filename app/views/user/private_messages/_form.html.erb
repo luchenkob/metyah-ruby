@@ -25,7 +25,7 @@
     <% User::PrivateMessage::MESSAGE_INTENTS.each do |message_intent| %>
       <br>
     <%= form.label message_intent %>
-      <% checked = user_private_message.message_intent.split(',').include?(message_intent) %>
+      <% checked = user_private_message.message_intent.to_s.split(',').include?(message_intent) %>
       <%= form.check_box(:message_intent, {multiple: true, checked: checked}, message_intent, "") %>
     <% end %>
 

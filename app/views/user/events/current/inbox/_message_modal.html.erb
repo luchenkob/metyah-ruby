@@ -3,9 +3,9 @@
     <div class="modal-header">
       <h5 class="modal-title">
         <% if @current_event.allow_messaging? %>
-          Send Reply to <%= @reply_to.first_name %>
+          Send Reply to <%= @send_to.first_name %>
         <% else %>
-          Sorry you cannot message <%= @reply_to.first_name %> now
+          Sorry you cannot message <%= @send_to.first_name %> now
         <% end %>
       </h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -14,13 +14,13 @@
     </div>
     <div class="modal-body">
       <% if @current_event.allow_messaging? %>
-        <%# render partial: 'user/events/current/inbox/reply_modal/allowed' %>
+        <%# render partial: 'user/events/current/inbox/message_modal/allowed' %>
       <% else %>
-        <%# render partial: 'user/events/current/inbox/reply_modal/denied' %>
+        <%# render partial: 'user/events/current/inbox/message_modal/denied' %>
       <% end %>
-        <%= render partial: 'user/events/current/inbox/reply_modal/allowed' %>
+        <%= render partial: 'user/events/current/inbox/message_modal/allowed' %>
         <hr>
-        <%= render partial: 'user/events/current/inbox/reply_modal/denied' %>
+        <%= render partial: 'user/events/current/inbox/message_modal/denied' %>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>

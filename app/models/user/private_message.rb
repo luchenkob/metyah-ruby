@@ -23,4 +23,7 @@ class User::PrivateMessage < ApplicationRecord
       errors.add(:message_intent, "is not valid")
     end
   end
+
+  def message_intents
+  end
 end
