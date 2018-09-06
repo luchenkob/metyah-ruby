@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :user do
-    get 'voting/vote'
+    post 'voting/vote'
   end
   namespace :user do
   end

@@ -2,9 +2,9 @@
  render partial: "user/voting/vote", locals: {
    voter: voter,
    votable: votable,
-   action: :upvote,
-   action_scope: :favorite,
-   icon_class: "ui-1_simple-delete",
+   vote_action: :downvote,
+   vote_scope: :block,
+   icon_class: "ui-1_simple-remove",
    icon_color: "red"
  }
 %>
