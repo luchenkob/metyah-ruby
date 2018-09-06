@@ -12,6 +12,16 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+    <div class="modal-body">
+      <% if @current_event.allow_messaging? %>
+        <%# render partial: 'user/events/current/inbox/reply_modal/allowed' %>
+      <% else %>
+        <%# render partial: 'user/events/current/inbox/reply_modal/denied' %>
+      <% end %>
+        <%= render partial: 'user/events/current/inbox/reply_modal/allowed' %>
+        <hr>
+        <%= render partial: 'user/events/current/inbox/reply_modal/denied' %>
+    </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>
     </div>

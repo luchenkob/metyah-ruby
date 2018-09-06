@@ -4,4 +4,7 @@
   </div>
 </div>
 
-<%= render partial: 'user/events/current/inbox/messages' %>
+<%= render partial: 'user/events/current/inbox/messages', locals: {messages: @messages} %>
+
+<h2>All Messages</h2>
+<%= render partial: 'user/events/current/inbox/messages', locals: { messages: User::PrivateMessage.all } %>

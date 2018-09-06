@@ -10,8 +10,7 @@ class User::Events::CurrentController < UserController
   end
 
   def inbox
-    @messages = User::PrivateMessage.all
-    #@messages = User::PrivateMessage.where(recipient_id: current_user.id)
+    @messages = User::PrivateMessage.where(recipient_id: current_user.id).or(User::PrivateMessage.where(sender_id: current_user.id))
   end
 
   def message_send_modal
@@ -32,6 +31,6 @@ class User::Events::CurrentController < UserController
 
   private
     def set_current_event
-      @current_event = Event.last || Event.new(name: "No Current Event...")
+      @current_event = Event.find(params[:id]) || Event.last || Event.new(name: "No Current Event...")
     end
 end

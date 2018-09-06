@@ -1,4 +1,4 @@
-class User::PrivateMessagesController < ApplicationController
+class User::PrivateMessagesController < UserController
   before_action :set_user_private_message, only: [:show, :edit, :update, :destroy]
 
   # POST /user/private_messages
@@ -8,7 +8,7 @@ class User::PrivateMessagesController < ApplicationController
 
     respond_to do |format|
       if @user_private_message.save
-        format.html { redirect_to @user_private_message, notice: 'Private message was successfully created.' }
+        format.html { redirect_to inbox_user_current_event_path(id: @user_private_message.event_id), notice: 'Private message was successfully created.' }
         format.json { render :show, status: :created, location: @user_private_message }
       else
         format.html { render :new }
@@ -49,6 +49,10 @@ class User::PrivateMessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_private_message_params
-      params.require(:user_private_message).permit(:content, :sender_id, :recipient_id)
+      pm_hash = params.require(:user_private_message).permit(
+        :content, :sender_id, :recipient_id, :event_id, message_intent: [])
+      pm_hash[:message_intent] = pm_hash[:message_intent].select { |mi| mi.present? }.join(',')
+
+      pm_hash
     end
 end
