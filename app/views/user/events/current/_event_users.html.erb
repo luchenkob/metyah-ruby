@@ -4,7 +4,12 @@
     <% user = event_user.user %>
     <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
-        <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
+        <h4 class="card-title">
+          <%= user.first_name %>, <%= event_user.user_age_zoned %>
+          <span class='pull-right'>
+            <i class="now-ui-icons ui-1_email-85"></i>
+          </span>
+        </h4>
         <dl class="dl-horizontal row">
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
           <dd class="col-7"><%= user.career %></dd>
