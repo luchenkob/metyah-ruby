@@ -10,17 +10,32 @@
       <div class='col-md-6'>
         <h4 class="card-title">
           <%= sender.first_name %>
+          <span class='pull-right'>
+            <%= render partial: 'user/voting/block/upvote', locals: {voter: current_user, votable: sender } %>
+          </span>
+          <span class='pull-right'>
+            <%= render partial: 'user/voting/block/downvote', locals: {voter: current_user, votable: sender } %>
+          </span>
+          <span class='pull-right'>
+            <%= render partial: 'user/voting/favorites/upvote', locals: {voter: current_user, votable: sender }  %>
+          </span>
+          <span class='pull-right'>
+            <%= render partial: 'user/voting/favorites/downvote', locals: {voter: current_user, votable: sender } %>
+          </span>
+        </h4>
+        <p><%= message.content %></p>
+
+        <div class='text-center'>
           <% message.message_intent.split(',').each do |message_intent| %>
             <span class="badge badge-primary"><%= message_intent %></span>
           <% end %>
-        </h4>
-        <p><%= message.content %></p>
+        </div>
       </div>
       <div class='col-md-3 text-center'>
         <br>
         <%= datetime_zoned_datetime(message.created_at, message.event.place) %>
         <br>
-        <% if @current_user.id == message.recipient_id %>
+        <% if current_user.id == message.recipient_id %>
           <%= form_with url: user_current_message_modal_path do |f| %>
             <%= f.hidden_field :id, value: @current_event.id %>
             <%= f.hidden_field :send_to_id, value: sender.id %>
@@ -33,3 +48,4 @@
     </div>
   </div>
 </div>
+

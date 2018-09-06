@@ -1,0 +1,10 @@
+<%=
+ render partial: "user/voting/vote", locals: {
+   voter: voter,
+   votable: votable,
+   action: :downvote,
+   action_scope: :block,
+   icon_class: "ui-1_simple-delete",
+   icon_color: "green"
+ }
+%>

@@ -1,0 +1,25 @@
+<% opposite_action_map = { upvote: :downvote, downvote: :upvote} %>
+
+console.log('<%= "#{@voter.id} #{@action} #{@votable.id} as #{@action_scope}" %>');
+
+<% if [:upvote, :downvote].include?(@action) %>
+  <% if [:favorite, :block].include?(@action_scope) %>
+    var eventsModal = $('#<%= @action_scope %>-<%= @votable.id %>');
+    if (eventsModal.length > 0) {
+      eventsModal.html("<%= j render(partial: "user/voting/#{@action_scope}/#{opposite_action_map[@action]}") %>");
+    } else {
+      console.log('#modal not found');
+    }
+    eventsModal.modal({
+      show: true
+    });
+  <% else %>
+    console.log("Invalid action Scope:" + @action_scope);
+  <% end %>
+<% else %>
+  console.log("Invalid action:" + @action);
+
+  <% if ![:favorite, :block].include?(@action_scope) %>
+    console.log("Invalid action Scope:" + @action_scope);
+  <% end %>
+<% end %>
