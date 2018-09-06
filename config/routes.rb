@@ -32,12 +32,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :private_messages do
-      collection do
-        post 'message_reply_modal'
-        post 'message_send_modal'
-      end
-    end
+    resources :private_messages
   end
 
   get 'admin', to: 'admin/events#index'
