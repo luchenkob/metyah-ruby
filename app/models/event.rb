@@ -86,42 +86,6 @@ class Event < ApplicationRecord
     end
   end
 
-  def start_at_zoned
-    start_at.in_time_zone(place.timezone)
-  end
-
-  define_method(:my_method) do |foo, bar| # or even |*args|
-    # do something
-  end
-
-  def start_at_zoned_date
-    start_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
-  end
-
-  def start_at_zoned_time
-    start_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
-  end
-
-  def start_at_zoned_datetime
-    start_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
-  end
-
-  def end_at_zoned
-    end_at.in_time_zone(place.timezone)
-  end
-
-  def end_at_zoned_date
-    end_at.in_time_zone(place.timezone).strftime("#{place.date_format}")
-  end
-
-  def end_at_zoned_time
-    end_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
-  end
-
-  def end_at_zoned_datetime
-    end_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
-  end
-
   def set_code
     # Use devise for
     self.code = generate_code
@@ -155,7 +119,7 @@ class Event < ApplicationRecord
   end
 
   def display_profiles_starts_at
-    start_at_zoned + display_profiles_after_minutes.minutes
+    start_at + display_profiles_after_minutes.minutes
   end
 
   def display_profiles_ends_at
@@ -167,7 +131,7 @@ class Event < ApplicationRecord
   end
 
   def allow_messaging_starts_at
-    end_at_zoned + allow_messaging_after_minutes.minutes
+    end_at + allow_messaging_after_minutes.minutes
   end
 
   def allow_messaging_ends_at
@@ -188,11 +152,17 @@ class Event < ApplicationRecord
     end
   end
 
+  def current_time
+    Time.current
+  end
+
 
   zoned_methods = [
     :start_at, :end_at,
     :display_profiles_starts_at, :display_profiles_ends_at,
     :allow_messaging_starts_at, :allow_messaging_ends_at,
+    # temp Methods
+    :current_time
   ]
   zoned_methods.each do |zone_method|
     # Defines the following instance helper methods
@@ -217,11 +187,11 @@ class Event < ApplicationRecord
     end
 
     define_method("#{zone_method}_zoned_time") do
-      start_at.in_time_zone(place.timezone).strftime("#{place.time_format}")
+      send(zone_method).in_time_zone(place.timezone).strftime("#{place.time_format}")
     end
 
     define_method("#{zone_method}_zoned_datetime") do
-      start_at.in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
+      send(zone_method).in_time_zone(place.timezone).strftime("#{place.date_format} #{place.time_format}")
     end
   end
 end

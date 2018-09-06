@@ -4,7 +4,19 @@
     <% user = event_user.user %>
     <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
-        <h4 class="card-title"><%= user.first_name %>, <%= event_user.user_age_zoned %></h4>
+        <h4 class="card-title">
+          <%= user.first_name %>, <%= event_user.user_age_zoned %>
+          <span class='pull-right'>
+            <%= form_with url: user_current_message_modal_path(id: event_user.event.id) do |f| %>
+              <%= f.hidden_field :send_to_id, value: user.id %>
+              <div class="form-group">
+                <%= button_tag(type: "submit", class: "btn btn-link") do %>
+                  <span><i class="now-ui-icons ui-1_email-85"></i></span>
+                <% end %>
+              </div>
+            <% end %>
+          </span>
+        </h4>
         <dl class="dl-horizontal row">
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
           <dd class="col-7"><%= user.career %></dd>
@@ -13,7 +25,6 @@
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
           <dd class="col-7"><%= user.location %></dd>
         </dl>
-        This is some text within a card body.
       </div>
     </div>
   <% end %>

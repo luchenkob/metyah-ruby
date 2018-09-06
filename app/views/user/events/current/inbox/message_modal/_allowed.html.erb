@@ -1,0 +1,2 @@
+<% user_private_message = user_private_message || User::PrivateMessage.new(sender_id: current_user.id, recipient_id: @send_to.id, event_id: @current_event.id ) %>
+<%= render partial: 'user/private_messages/form', locals: { user_private_message: user_private_message } %>

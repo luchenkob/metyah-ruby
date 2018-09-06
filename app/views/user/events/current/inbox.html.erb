@@ -1,8 +1,10 @@
-<h1>User::Events::Current#inbox</h1>
-<p>Find me in app/views/user/events/current/inbox.html.erb</p>
-
 <div class="card">
   <div class="card-body">
     <%= @current_event.allow_messaging_status_message %>
   </div>
 </div>
+
+<%= render partial: 'user/events/current/inbox/messages', locals: {messages: @messages} %>
+
+<h2>All Messages</h2>
+<%= render partial: 'user/events/current/inbox/messages', locals: { messages: User::PrivateMessage.all } %>

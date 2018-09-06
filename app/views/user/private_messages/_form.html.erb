@@ -1,0 +1,39 @@
+<%= form_with(model: user_private_message, local: true) do |form| %>
+  <%= form.hidden_field :sender_id %>
+  <%= form.hidden_field :recipient_id %>
+  <%= form.hidden_field :event_id %>
+  <% if user_private_message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_private_message.errors.count, "error") %> prohibited this user_private_message from being saved:</h2>
+
+      <ul>
+      <% user_private_message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message_intent %>
+
+    <% User::PrivateMessage::MESSAGE_INTENTS.each do |message_intent| %>
+      <br>
+    <%= form.label message_intent %>
+      <% checked = user_private_message.message_intent.to_s.split(',').include?(message_intent) %>
+      <%= form.check_box(:message_intent, {multiple: true, checked: checked}, message_intent, "") %>
+    <% end %>
+
+
+
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

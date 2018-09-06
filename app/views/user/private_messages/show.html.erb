@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @user_private_message.content %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @user_private_message.sender %>
+</p>
+
+<p>
+  <strong>Recipient:</strong>
+  <%= @user_private_message.recipient %>
+</p>
+
+<%= link_to 'Edit', edit_user_private_message_path(@user_private_message) %> |
+<%= link_to 'Back', user_private_messages_path %>

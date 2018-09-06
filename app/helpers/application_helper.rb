@@ -6,4 +6,22 @@ module ApplicationHelper
       end
     end
   end
+
+
+  def datetime_zoned(datetime, place)
+    datetime.in_time_zone(place.timezone)
+  end
+
+  def datetime_zoned_date(datetime, place)
+    datetime_zoned(datetime, place).strftime("#{place.date_format}")
+  end
+
+  def datetime_zoned_time(datetime, place)
+    datetime_zoned(datetime, place).strftime("#{place.time_format}")
+  end
+
+  def datetime_zoned_datetime(datetime, place)
+    datetime_zoned(datetime, place).strftime("#{place.date_format} #{place.time_format}")
+  end
+
 end
