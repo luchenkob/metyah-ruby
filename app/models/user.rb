@@ -4,8 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  acts_as_voter
+  acts_as_votable # Can block/favorite this
+
   has_uploadcare_file :photo
 
+  has_many :profile_photos
   has_many :event_users, dependent: :destroy
   has_many :events, through: :event_users
 
@@ -21,8 +25,6 @@ class User < ApplicationRecord
   validates :gender, :inclusion => { :in => User::GENDERS }
 
   after_save :find_create_profile_photo # update profile photo user_id
-
-  has_many :profile_photos
 
   def standardize
     #self.birthdate = DateTime.strptime(birthdate, "%m/%d/%Y %H:%M %p")
