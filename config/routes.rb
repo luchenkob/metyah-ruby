@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :user do
+    get 'voting/vote'
+  end
+  namespace :user do
   end
   resources :profile_photos, only: [:create]
   devise_for :users
