@@ -1,0 +1,28 @@
+<% if display_status %>
+  <span class='pull-right'>
+    <span class="badge badge-primary"><%= vote_status(voter, votable) %></span>
+  </span>
+<% end %>
+
+<% vote_status = voter.vote_status(votable) %>
+
+<% case vote_status %>
+<% when User::VOTE_STATUS_FAVORITE %>
+  <span class='pull-right'>
+    <%= render partial: 'user/voting/votes/unfavorite', locals: {voter: voter, votable: votable } %>
+  </span>
+  <span class='pull-right'>
+    <%= render partial: 'user/voting/votes/block', locals: {voter: voter, votable: votable } %>
+  </span>
+<% when User::User::VOTE_STATUS_BLOCK %>
+  <span class='pull-right'>
+    <%= render partial: 'user/voting/votes/unblock', locals: {voter: voter, votable: votable } %>
+  </span>
+<% when User::User::VOTE_STATUS_NONE %>
+  <span class='pull-right'>
+    <%= render partial: 'user/voting/votes/favorite', locals: {voter: voter, votable: votable } %>
+  </span>
+  <span class='pull-right'>
+    <%= render partial: 'user/voting/votes/block', locals: {voter: voter, votable: votable } %>
+  </span>
+<% end %>

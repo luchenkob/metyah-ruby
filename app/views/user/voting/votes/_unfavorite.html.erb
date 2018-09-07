@@ -1,0 +1,10 @@
+<%=
+ render partial: "user/voting/vote", locals: {
+   voter: voter,
+   votable: votable,
+   vote_action: :unvote,
+   vote_scope: :favorite,
+   icon_class: "ui-2_favourite-28",
+   icon_color: "black"
+ }
+%>

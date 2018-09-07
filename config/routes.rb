@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :user do
+    post 'voting/vote'
+  end
+  namespace :user do
   end
   resources :profile_photos, only: [:create]
   devise_for :users
@@ -15,7 +18,7 @@ Rails.application.routes.draw do
   get 'user/events/current/:id/attendees' => 'user/events/current#attendees', as: :attendees_user_current_event
   get 'user/events/current/:id/favorites' => 'user/events/current#favorites', as: :favorites_user_current_event
   get 'user/events/current/:id/inbox' => 'user/events/current#inbox', as: :inbox_user_current_event
-  get 'user/events/current/:id' => 'user/events/current#inbox', as: :user_current_event
+  get 'user/events/current/:id' => 'user/events/current#attendees', as: :user_current_event
   post 'user/events/current/:id/message' => 'user/events/current#message_modal', as: :user_current_message_modal
 
 
