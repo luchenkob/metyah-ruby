@@ -1,3 +1,9 @@
-<% opposite_action_map = { upvote: :downvote, downvote: :upvote} %>
-
 console.log('<%= "#{@voter.id} #{@action} #{@votable.id}" %>');
+
+var klass = '#votes-<%= @votable.id %>'
+var query = $(klass);
+if (query.length > 0) {
+  query.html("<%= j render(partial: "user/voting/votes", locals: {voter: @voter, votable: @votable }) %>");
+} else {
+  console.log('#' + klass + ' not found');
+}

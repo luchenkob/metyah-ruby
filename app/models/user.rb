@@ -26,6 +26,10 @@ class User < ApplicationRecord
 
   after_save :find_create_profile_photo # update profile photo user_id
 
+  VOTE_STATUS_FAVORITE = "Favorite"
+  VOTE_STATUS_NONE = "None"
+  VOTE_STATUS_BLOCK = "Block"
+
   def standardize
     #self.birthdate = DateTime.strptime(birthdate, "%m/%d/%Y %H:%M %p")
   end
@@ -43,6 +47,18 @@ class User < ApplicationRecord
     # Source: https://medium.com/@craigsheen/calculating-age-in-rails-9bb661f11303
     # May be slightly off based on timezone
     ((Time.current - birthdate.to_time) / 1.year.seconds).floor
+  end
+
+  def vote_status(other_user)
+    vote = self.voted_as_when_voted_for(other_user)
+    case vote
+    when true
+      User::VOTE_STATUS_FAVORITE
+    when nil
+      User::VOTE_STATUS_NONE
+    when false
+      User::VOTE_STATUS_BLOCK
+    end
   end
 
 end

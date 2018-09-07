@@ -11,21 +11,9 @@
         <h4 class="card-title">
           <%= sender.first_name %>
           <% if current_user.id == message.recipient_id %>
-            <span class='pull-right'>
-              <span class="badge badge-primary"><%= vote_status(current_user, sender) %></span>
-            </span>
-            <span class='pull-right'>
-              <%= render partial: 'user/voting/votes/favorite', locals: {voter: current_user, votable: sender } %>
-            </span>
-            <span class='pull-right'>
-              <%= render partial: 'user/voting/votes/unfavorite', locals: {voter: current_user, votable: sender } %>
-            </span>
-            <span class='pull-right'>
-              <%= render partial: 'user/voting/votes/block', locals: {voter: current_user, votable: sender } %>
-            </span>
-            <span class='pull-right'>
-              <%= render partial: 'user/voting/votes/unblock', locals: {voter: current_user, votable: sender } %>
-            </span>
+            <div id='votes-<%= sender.id %>'>
+              <%= render partial: 'user/voting/votes', locals: {voter: current_user, votable: sender } %>
+            </div>
           <% end %>
         </h4>
         <p><%= message.content %></p>
