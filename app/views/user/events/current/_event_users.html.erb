@@ -4,19 +4,26 @@
     <% user = event_user.user %>
     <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
+        <span class='pull-right'>
+          <%= form_with url: user_current_message_modal_path(id: event_user.event.id) do |f| %>
+            <%= f.hidden_field :send_to_id, value: user.id %>
+            <div class="form-group">
+              <%= button_tag(type: "submit", class: "btn btn-sm btn-link") do %>
+                <span><i class="now-ui-icons ui-1_email-85"></i></span>
+              <% end %>
+            </div>
+          <% end %>
+        </span>
+
+        <span class='pull-right'>
+          <div id='votes-<%= user.id %>'>
+            <%= render partial: 'user/voting/votes', locals: {voter: current_user, votable: user, display_status: false } %>
+          </div>
+        </span>
         <h4 class="card-title">
           <%= user.first_name %>, <%= event_user.user_age_zoned %>
-          <span class='pull-right'>
-            <%= form_with url: user_current_message_modal_path(id: event_user.event.id) do |f| %>
-              <%= f.hidden_field :send_to_id, value: user.id %>
-              <div class="form-group">
-                <%= button_tag(type: "submit", class: "btn btn-link") do %>
-                  <span><i class="now-ui-icons ui-1_email-85"></i></span>
-                <% end %>
-              </div>
-            <% end %>
-          </span>
         </h4>
+        <br>
         <dl class="dl-horizontal row">
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
           <dd class="col-7"><%= user.career %></dd>

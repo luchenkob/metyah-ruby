@@ -1,6 +1,8 @@
-<span class='pull-right'>
-  <span class="badge badge-primary"><%= vote_status(voter, votable) %></span>
-</span>
+<% if display_status %>
+  <span class='pull-right'>
+    <span class="badge badge-primary"><%= vote_status(voter, votable) %></span>
+  </span>
+<% end %>
 
 <% vote_status = voter.vote_status(votable) %>
 

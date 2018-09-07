@@ -8,14 +8,16 @@
         <% end %>
       </div>
       <div class='col-md-6'>
+        <% if current_user.id == message.recipient_id %>
+          <div id='votes-<%= sender.id %>'>
+            <%= render partial: 'user/voting/votes', locals: {voter: current_user, votable: sender, display_status: true } %>
+          </div>
+        <% end %>
         <h4 class="card-title">
           <%= sender.first_name %>
-          <% if current_user.id == message.recipient_id %>
-            <div id='votes-<%= sender.id %>'>
-              <%= render partial: 'user/voting/votes', locals: {voter: current_user, votable: sender } %>
-            </div>
-          <% end %>
         </h4>
+        <br>
+        <br>
         <p><%= message.content %></p>
 
         <div class='text-center'>
