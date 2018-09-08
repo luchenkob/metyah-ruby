@@ -61,4 +61,21 @@ class User < ApplicationRecord
     end
   end
 
+  def blocked_user_ids
+    @blocked_users = self
+    .votes # Favorites/blocks
+    .down # Blocked
+    .for_type(User) # Users only
+    .pluck(:votable_id) # Get list of votable ids
+  end
+
+  def blocked_users
+    @blocked_users = self
+    .votes # Favorites/blocks
+    .down # Blocked
+    .for_type(User) # Users only
+    .votables # Get list of votables
+  end
+
+
 end

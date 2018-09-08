@@ -9,9 +9,11 @@ class User::ProfileController < UserController
   def messages
     @messages = User::PrivateMessage
     .where(recipient_id: current_user.id)
+    .where.not(sender_id: current_user.blocked_user_ids)
     .or(
       User::PrivateMessage
       .where(sender_id: current_user.id)
+      .where.not(sender_id: current_user.blocked_user_ids)
     ).includes(:sender, :event, event: :place)
   end
 end
