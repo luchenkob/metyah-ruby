@@ -6,11 +6,22 @@ class User::Events::CurrentController < UserController
   end
 
   def favorites
-    @event_users = @current_event.event_users
+    @favorite_ids = current_user
+    .votes # Favorites/blocks
+    .up # Favorites
+    .for_type(User) # Users only
+    .pluck(:votable_id) # Get list of user ids
+
+    @event_users = EventUser.where(event_id: @current_event.id, user_id: @favorite_ids)
   end
 
   def inbox
-    @messages = User::PrivateMessage.where(recipient_id: current_user.id).or(User::PrivateMessage.where(sender_id: current_user.id))
+    @messages = User::PrivateMessage
+    .where(recipient_id: current_user.id, event_id: @current_event.id)
+    .or(
+      User::PrivateMessage
+      .where(sender_id: current_user.id, event_id: @current_event.id)
+    ).includes(:sender, :event, event: :place)
   end
 
   def message_modal

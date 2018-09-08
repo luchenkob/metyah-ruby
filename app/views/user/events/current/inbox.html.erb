@@ -7,9 +7,3 @@
 <div class='row'>
   <%= render partial: 'user/events/current/inbox/message', collection: @messages.includes(:sender, :event, event: :place) %>
 </div>
-
-<h2>All Messages</h2>
-<div class='row'>
-  <% @current_user = @current_user || current_user %>
-  <%= render partial: 'user/events/current/inbox/message', collection: User::PrivateMessage.all.includes(:sender, :event, event: :place) %>
-</div>
