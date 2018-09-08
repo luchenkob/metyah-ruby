@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   has_many :users, through: :event_users
 
   belongs_to :host
+  belongs_to :place
 
   validates :host, presence: true, on: :create
   validates :code, presence: true, uniqueness: true
