@@ -8,7 +8,11 @@
   </div>
 <% end %>
 
-<%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
+<% if @event_users.present? %>
+  <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
+<% else %>
+  No one is attending this event. :(
+<% end %>
 
 <h2>
   All Event Users<br>
