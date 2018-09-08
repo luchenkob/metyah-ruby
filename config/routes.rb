@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :hosts
+  get 'pages/root'
+  devise_for :hosts, controllers: { sessions: "hosts/sessions" }
   namespace :user do
     post 'voting/vote'
   end
   namespace :user do
   end
   resources :profile_photos, only: [:create]
-  devise_for :users
+  devise_for :users, controllers: { sessions: "users/sessions" }
   get 'user/events/current', to: 'user/events/current#attendees'
 
   get 'user/profile' => 'user/profile#profile', as: :user_profile
@@ -44,7 +45,7 @@ Rails.application.routes.draw do
     resources :events, :places
   end
 
-  root "user/events#index"
+  root "pages#root"
 end
 
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
