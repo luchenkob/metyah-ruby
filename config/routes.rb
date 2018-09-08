@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  get 'pages/root'
+  devise_for :hosts, skip: [:registrations], controllers: { sessions: "hosts/sessions", registrations: "hosts/registrations" }
+  as :host do
+    get 'hosts/edit' => 'devise/registrations#edit', :as => 'edit_host_registration'
+    put '/hosts' => 'hosts/registrations#update', :as => 'host_registration'
+    get '/hosts' => 'devise/registrations#edit' # Avoid errors if refresh page after editing fail
+  end
   namespace :user do
     post 'voting/vote'
   end
   namespace :user do
   end
   resources :profile_photos, only: [:create]
-  devise_for :users
+  devise_for :users, controllers: { sessions: "users/sessions" }
   get 'user/events/current', to: 'user/events/current#attendees'
 
   get 'user/profile' => 'user/profile#profile', as: :user_profile
@@ -43,7 +50,7 @@ Rails.application.routes.draw do
     resources :events, :places
   end
 
-  root "user/events#index"
+  root "pages#root"
 end
 
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

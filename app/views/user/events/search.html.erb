@@ -1,15 +1,7 @@
-<%= form_with url: search_user_events_path, class: "form-inline justify-content-center" do |f| %>
-  <%# @todo: Add error handling and user_event logic %>
-  <div class="form-group">
-    <%= f.select :city, Place.where(id: Event.all.map(&:place_id)).pluck(:name).uniq.sort,
-                 {include_blank: 'City'}, { :class => 'form-control' } %>
-    <%= f.select :type, Event.all.pluck(:event_type).uniq.sort,
-                 {include_blank: 'Type'}, { :class => 'form-control' } %>
-  </div>
-<% end %>
+<%# render partial: 'user/events/search/form' %>
 <br>
 <div class="card">
-  <h2 class="card-title text-center">Results</h2>
+  <h2 class="card-title text-center">Upcoming Events</h2>
   <div class="card-body">
     <%= render partial: "user/events/table",
                locals: { events: @events.upcoming, event_action: :modal, event_action_label: "Details" } %>

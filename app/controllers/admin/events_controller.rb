@@ -4,7 +4,11 @@ class Admin::EventsController < AdminController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    if current_host.admin?
+      @events = Event.all
+    else
+      @events = Event.where(host_id: current_host.id)
+    end
   end
 
   # GET /events/1

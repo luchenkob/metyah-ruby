@@ -6,8 +6,10 @@ class Event < ApplicationRecord
   has_many :event_users, dependent: :destroy
   has_many :users, through: :event_users
 
+  belongs_to :host
   belongs_to :place
 
+  validates :host, presence: true, on: :create
   validates :code, presence: true, uniqueness: true
   validates :start_end_at, :place_id, presence: true
   validates :display_profiles_after_minutes,

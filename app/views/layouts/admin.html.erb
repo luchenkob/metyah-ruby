@@ -10,7 +10,9 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <%= bootstrap_flash %>
+            <div id='flash-message'>
+              <%= render partial: 'layouts/shared/flash', flash: flash %>
+            </div>
             <%= yield %>
           </div>
         </div>
