@@ -9,16 +9,16 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class='nav-item <%= active_navigation?("current") %>'>
-          <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
-        </li>
-        <li class='nav-item <%= active_navigation?("events") %>'>
-          <%= link_to "Events", user_events_path, class: "nav-link"  %>
-        </li>
-        <li class='nav-item <%= active_navigation?("profile", "profile") %>'>
-          <%= link_to 'Account', user_profile_path, class: "nav-link"  %>
-        </li>
         <% if user_signed_in? %>
+          <li class='nav-item <%= active_navigation?("current") %>'>
+            <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
+          </li>
+          <li class='nav-item <%= active_navigation?("events") %>'>
+            <%= link_to "Events", user_events_path, class: "nav-link"  %>
+          </li>
+          <li class='nav-item <%= active_navigation?("profile", "profile") %>'>
+            <%= link_to 'Account', user_profile_path, class: "nav-link"  %>
+          </li>
           <li class='nav-item'>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
@@ -28,12 +28,14 @@
           </li>
         <% end %>
       </ul>
+      <% if user_signed_in? %>
       <ul class="navbar-nav mr-auto">
         <form class="form-inline ml-auto" data-background-color>
             <div class="form-group has-white">
               <input type="text" class="form-control" placeholder="Search Events">
             </div>
         </form>
+      <% end %>
       </ul>
     </div>
   </div>

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get 'pages/root'
-  devise_for :hosts, controllers: { sessions: "hosts/sessions" }
+  devise_for :hosts, skip: [:registrations], controllers: { sessions: "hosts/sessions", registrations: "hosts/registrations" }
+  as :host do
+    get 'hosts/edit' => 'devise/registrations#edit', :as => 'edit_host_registration'
+    put '/hosts' => 'hosts/registrations#update', :as => 'host_registration'
+    get '/hosts' => 'devise/registrations#edit' # Avoid errors if refresh page after editing fail
+  end
   namespace :user do
     post 'voting/vote'
   end
