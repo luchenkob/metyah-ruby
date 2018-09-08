@@ -4,4 +4,6 @@ class Host < ApplicationRecord
   devise :database_authenticatable,
          # :registerable, # Registration not allowed
          :recoverable, :rememberable, :validatable
+
+  has_many :events, dependent: :destroy
 end
