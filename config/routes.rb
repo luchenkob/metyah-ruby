@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :hosts
   namespace :user do
     post 'voting/vote'
   end
