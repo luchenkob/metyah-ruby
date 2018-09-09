@@ -10,8 +10,10 @@ class Event < ApplicationRecord
   belongs_to :place
 
   validates :host, presence: true, on: :create
+  validates :name, :address, :description, presence: true
   validates :code, presence: true, uniqueness: true
   validates :start_end_at, :place_id, presence: true
+  validates :description, length: { minimum: 2, maximum: 500 }
   validates :display_profiles_after_minutes,
             :display_profiles_for_minutes,
             :allow_messaging_after_minutes,
