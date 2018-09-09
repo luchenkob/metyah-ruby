@@ -22,7 +22,7 @@ class User::EventsController < UserController
   end
 
   def search
-    @events = Event.all
+    @events = Event.active.upcoming
   end
 
   def modal
