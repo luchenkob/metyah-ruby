@@ -37,6 +37,9 @@ class Event < ApplicationRecord
   EVENT_TYPES = [EVENT_TYPE_SPEED_DATING, EVENT_TYPE_MIXER, EVENT_TYPE_NETWORKING, EVENT_TYPE_OTHER].freeze
   validates :event_type, :inclusion => { :in => Event::EVENT_TYPES }
 
+  scope :active, -> { where(event_status: EVENT_STATUS_ACTIVE) }
+  scope :inactive, -> { where(event_status: EVENT_STATUS_INACTIVE) }
+
   def self.past
     where(end_at: Time.at(0)..Time.current)
   end
