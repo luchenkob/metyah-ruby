@@ -28,9 +28,6 @@
       <% checked = user_private_message.message_intent.to_s.split(',').include?(message_intent) %>
       <%= form.check_box(:message_intent, {multiple: true, checked: checked}, message_intent, "") %>
     <% end %>
-
-
-
   </div>
 
   <div class="actions">

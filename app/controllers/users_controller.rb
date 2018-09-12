@@ -42,10 +42,17 @@ class UsersController < ApplicationController
       user_params_hash = params.require(:user).permit(
         :email, :first_name, :last_name, :birthdate, :gender,
         :career, :school, :location, :bio,
-        :photo
+        :photo,
+        :interests => []
       )
 
+      if @user.present?
+        user_params_hash.delete(:photo) unless user_params_hash[:photo].present?
+      end
+
+
       user_params_hash[:birthdate] = DateTime.strptime(user_params_hash["birthdate"], "%m/%d/%Y %H:%M %p")
+      user_params_hash[:interests] = user_params_hash[:interests].select { |interest| interest.present? }.join(',')
 
       user_params_hash
     end
