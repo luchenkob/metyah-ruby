@@ -29,6 +29,22 @@
         <dd><%= @event.event_status %></dd>
         <dt><strong><%= model_class.human_attribute_name(:event_type) %>:</strong></dt>
         <dd><%= @event.event_type %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:ticket_purchase_url) %>:</strong></dt>
+        <dd>
+          <% if @event.ticket_purchase_url %>
+            <%= link_to @event.ticket_purchase_url, @event.ticket_purchase_url, target: "_blank" %>
+          <% else %>
+            Not Provided
+          <% end %>
+        </dd>
+        <dt><strong><%= model_class.human_attribute_name(:contact_info) %>:</strong></dt>
+        <dd>
+          <% if @event.ticket_purchase_url %>
+            <%= simple_format @event.contact_info %>
+          <% else %>
+            Not Provided
+          <% end %>
+        </dd>
       </dl>
     </div>
     <div class="modal-footer">
