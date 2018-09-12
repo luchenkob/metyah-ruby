@@ -4,7 +4,8 @@
     <small>
       Starts: <%= @current_event.start_at_zoned_datetime %><br>
       Ends: <%= @current_event.end_at_zoned_datetime %><br>
-      Current: <%= datetime_zoned_datetime(Time.current, @current_event.place) %>
+      Current: <%= datetime_zoned_datetime(Time.current, @current_event.place) %> <br>
+      (not autorefreshed)
     </small>
   </h2>
 </div>
