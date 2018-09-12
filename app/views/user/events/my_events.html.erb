@@ -18,7 +18,7 @@
   <h2 class="card-title text-center">Past</h2>
   <div class="card-body">
     <%= render partial: "user/events/table",
-               locals: { events: @events.past, event_action: :show, event_action_label: "Review" } %>
+               locals: { events: @events.past, event_action: :current, event_action_label: "Review" } %>
   </div>
 </div>
 
@@ -50,6 +50,6 @@
   <h2 class="card-title text-center">Past</h2>
   <div class="card-body">
     <%= render partial: "user/events/table",
-               locals: { events: @events.past, event_action: :show, event_action_label: "Review" } %>
+               locals: { events: @events.past, event_action: :current, event_action_label: "Review" } %>
   </div>
 </div>
