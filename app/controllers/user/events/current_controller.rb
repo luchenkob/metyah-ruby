@@ -1,5 +1,5 @@
 class User::Events::CurrentController < UserController
-  before_action :set_current_event
+  before_action :redirect_unless_current_event
 
   def attendees
     @event_users = @current_event.event_users
@@ -35,7 +35,10 @@ class User::Events::CurrentController < UserController
   end
 
   private
-    def set_current_event
-      @current_event = Event.find_by(id: params[:id].to_i) || Event.last || Event.new(name: "No Current Event...")
+
+    def redirect_unless_current_event
+      if @current_event.nil?
+        redirect_to root_path
+      end
     end
 end

@@ -10,9 +10,11 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <% if user_signed_in? %>
-          <li class='nav-item <%= active_navigation?("current") %>'>
-            <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
-          </li>
+          <% if @current_event %>
+            <li class='nav-item <%= active_navigation?("current") %>'>
+              <%= link_to "Current", user_events_current_path, class: "nav-link"  %>
+            </li>
+          <% end %>
           <li class='nav-item <%= active_navigation?("events") %>'>
             <%= link_to "Events", user_events_path, class: "nav-link"  %>
           </li>
