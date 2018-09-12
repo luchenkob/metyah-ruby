@@ -66,6 +66,20 @@
     <%=f.error_span(:event_status) %>
   </div>
   <div class="form-group">
+    <%= f.label :ticket_purchase_url, "Ticket Purchase URL", :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :ticket_purchase_url, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:ticket_purchase_url) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contact_info, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :contact_info, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:contact_info) %>
+  </div>
+  <div class="form-group">
     <%= f.label :display_profiles_after_minutes, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :display_profiles_after_minutes, :class => 'form-control' %>

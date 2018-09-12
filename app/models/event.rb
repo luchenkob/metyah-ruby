@@ -14,6 +14,8 @@ class Event < ApplicationRecord
   validates :code, presence: true, uniqueness: true
   validates :start_end_at, :place_id, presence: true
   validates :description, length: { minimum: 2, maximum: 500 }
+  validates :ticket_purchase_url, url: { allow_blank: true }
+  validates :contact_info, length: { minimum: 10, maximum: 250, :allow_blank => true }
   validates :display_profiles_after_minutes,
             :display_profiles_for_minutes,
             :allow_messaging_after_minutes,
