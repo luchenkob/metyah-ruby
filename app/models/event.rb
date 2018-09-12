@@ -45,16 +45,11 @@ class Event < ApplicationRecord
   end
 
   def self.current
-    puts where(
-      start_at: Time.current..DateTime::Infinity.new,
-    ).ids.inspect
-    puts where(
-      end_at: Time.at(0)..Time.current,
-    ).ids.inspect
+    active.
     where(
       start_at: Time.current..DateTime::Infinity.new,
       end_at: Time.at(0)..Time.current,
-    )
+    ).
     where.not(id: past.ids + upcoming.ids)
   end
 
