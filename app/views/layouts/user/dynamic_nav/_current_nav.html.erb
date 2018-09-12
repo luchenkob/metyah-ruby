@@ -1,5 +1,12 @@
-<div class='container'>
-  <h2 class='text-center'><%= @current_event.name %></h2>
+<div class='container text-center'>
+  <h2>
+    <%= @current_event.name %><br>
+    <small>
+      Starts: <%= @current_event.start_at_zoned_datetime %><br>
+      Ends: <%= @current_event.end_at_zoned_datetime %><br>
+      Current: <%= datetime_zoned_datetime(Time.current, @current_event.place) %>
+    </small>
+  </h2>
 </div>
 <ul class="nav nav-pills nav-pills-primary justify-content-center">
   <li class='nav-item'>
