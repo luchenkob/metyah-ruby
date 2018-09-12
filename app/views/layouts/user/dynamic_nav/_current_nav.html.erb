@@ -1,4 +1,6 @@
-<h1><% @current_event.name %></h1>
+<div class='container'>
+  <h2 class='text-center'><%= @current_event.name %></h2>
+</div>
 <ul class="nav nav-pills nav-pills-primary justify-content-center">
   <li class='nav-item'>
     <%= link_to "Attendees", attendees_user_current_event_path(id: @current_event.id),
