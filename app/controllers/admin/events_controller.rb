@@ -72,6 +72,7 @@ class Admin::EventsController < AdminController
       params.require(:event).permit(
         :place_id, :host_id,
         :start_end_at, :name, :address, :description, :code, :event_status, :event_type,
+        :ticket_purchase_url, :contact_info,
         :display_profiles_after_minutes, :display_profiles_for_minutes,
         :allow_messaging_after_minutes, :allow_messaging_for_minutes
       )
