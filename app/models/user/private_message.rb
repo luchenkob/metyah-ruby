@@ -3,8 +3,6 @@ class User::PrivateMessage < ApplicationRecord
   belongs_to :recipient, :class_name => "User"
   belongs_to :event
 
-  serialize :message_intent
-
   validates :content, :recipient_id, :sender_id, :event_id, :message_intent, presence: true
   validates :content, length: { maximum: 250 }
 
@@ -14,6 +12,7 @@ class User::PrivateMessage < ApplicationRecord
     MESSAGE_INTENT_ROMANCE = "Romance".freeze,
   ].freeze
   validate :message_intent_allowed
+  serialize :message_intent
 
   default_scope { order(created_at: :desc) }
 
@@ -25,5 +24,6 @@ class User::PrivateMessage < ApplicationRecord
   end
 
   def message_intents
+
   end
 end

@@ -13,6 +13,14 @@ class User < ApplicationRecord
   has_many :event_users, dependent: :destroy
   has_many :events, through: :event_users
 
+  INTERESTS = [
+    INTERESTS_SOCIAL = "Social".freeze,
+    INTERESTS_PROFESSIONAL = "Professional".freeze,
+    INTERESTS_ROMANCE = "Romance".freeze,
+  ].freeze
+  validate :interests_allowed
+  serialize :interests
+
   validates :email, :first_name, :last_name, :birthdate, :gender, :photo, presence: true
 
   validates :bio, length: { maximum: 150 }
@@ -29,6 +37,14 @@ class User < ApplicationRecord
   VOTE_STATUS_FAVORITE = "Favorite"
   VOTE_STATUS_NONE = "None"
   VOTE_STATUS_BLOCK = "Block"
+
+
+  def interests_allowed
+    puts interests.inspect
+    if interests.present? && (interests.split(',') - INTERESTS).size > 0
+      errors.add(:interests, "is not valid")
+    end
+  end
 
   def standardize
     #self.birthdate = DateTime.strptime(birthdate, "%m/%d/%Y %H:%M %p")
