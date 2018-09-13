@@ -46,6 +46,18 @@
   <dd><%= @event.allow_messaging_after_minutes %></dd>
   <dt><strong><%= model_class.human_attribute_name(:allow_messaging_for_minutes) %>:</strong></dt>
   <dd><%= @event.allow_messaging_for_minutes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:start_at) %>:</strong></dt>
+  <dd><%= @event.start_at_zoned_datetime %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:end_at) %>:</strong></dt>
+  <dd><%= @event.end_at_zoned_datetime %></dd>
+  <dt><strong>Messaging Starts:</strong></dt>
+  <dd><%= @event.allow_messaging_starts_at_zoned_datetime %></dd>
+  <dt><strong>Messaging ends:</strong></dt>
+  <dd><%= @event.allow_messaging_ends_at_zoned_datetime %></dd>
+  <dt><strong>Display Profile starts:</strong></dt>
+  <dd><%= @event.allow_messaging_starts_at_zoned_datetime %></dd>
+  <dt><strong>Display Profile ends:</strong></dt>
+  <dd><%= @event.allow_messaging_ends_at_zoned_datetime %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
