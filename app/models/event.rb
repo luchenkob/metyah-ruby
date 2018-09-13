@@ -98,7 +98,9 @@ class Event < ApplicationRecord
     .start_end_at
     .split(" - ")
     .map do |date|
-      DateTime.strptime("#{date} #{place.timezone}", "%m/%d/%Y %H:%M %p %z")
+      datetime = DateTime.strptime("#{date} #{place.timezone}", "%m/%d/%Y %H:%M %p %z").to_time
+      datetime_formatted = datetime.strftime("%Y-%m-%d %H:%M %p")
+      ActiveSupport::TimeZone[place.timezone].parse(datetime_formatted)
     end
   end
 
