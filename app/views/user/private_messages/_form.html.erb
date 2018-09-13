@@ -1,36 +1,47 @@
-<%= form_with(model: user_private_message, local: true) do |form| %>
-  <%= form.hidden_field :sender_id %>
-  <%= form.hidden_field :recipient_id %>
-  <%= form.hidden_field :event_id %>
+<%= form_with(model: user_private_message, local: true, :html => { :class => "event" }) do |f| %>
+  <%= f.hidden_field :sender_id %>
+  <%= f.hidden_field :recipient_id %>
+  <%= f.hidden_field :event_id %>
   <% if user_private_message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user_private_message.errors.count, "error") %> prohibited this user_private_message from being saved:</h2>
 
-      <ul>
-      <% user_private_message.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(user_private_message.errors.count, "error") %> prohibited this event from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% user_private_message.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label' %>
+    <div>
+      <%= f.text_area :content, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
   </div>
 
-  <div class="field">
-    <%= form.label :message_intent %>
+  <div class="form-groupform-group">
+    <%= f.label :message_intent, :class => 'control-label' %>
 
-    <% User::PrivateMessage::MESSAGE_INTENTS.each do |message_intent| %>
-      <br>
-    <%= form.label message_intent %>
-      <% checked = user_private_message.message_intent.to_s.split(',').include?(message_intent) %>
-      <%= form.check_box(:message_intent, {multiple: true, checked: checked}, message_intent, "") %>
-    <% end %>
+    <div>
+      <% User::PrivateMessage::MESSAGE_INTENTS.each do |message_intent| %>
+        <div class='form-check-inline'>
+          <% checked = user_private_message.to_s.split(',').include?(message_intent) %>
+          <%= f.check_box :message_intent, {multiple: true, checked: checked, class: "form-check-input"}, message_intent, "" %>
+          <%= f.label message_intent, class: "form-check-label", for: "user_interests_#{message_intent.downcase}" %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= f.submit "Send", :class => 'btn btn-primary' %>
   </div>
 <% end %>
