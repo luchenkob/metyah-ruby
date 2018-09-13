@@ -9,6 +9,8 @@
 
     <%= f.uploadcare_single_uploader_field :photo, :class => 'form-control',
                               data: { crop: "1:1 upscale", "images-only": "true" }, value: nil %>
+    <%= f.submit "Save", :class => 'btn btn-primary btn-round' %>
+    <p>Profile photo must be saved after upload for change to take effect.</p>
   </div>
   <%=f.error_span(:photo) %>
 </div>
