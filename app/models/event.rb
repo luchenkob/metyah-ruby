@@ -49,10 +49,9 @@ class Event < ApplicationRecord
   def self.current
     active.
     where(
-      start_at: Time.current..DateTime::Infinity.new,
-      end_at: Time.at(0)..Time.current,
-    ).
-    where.not(id: past.ids + upcoming.ids)
+      start_at: Time.at(0)..Time.current,
+      end_at: Time.current..DateTime::Infinity.new,
+    )
   end
 
   def self.upcoming
@@ -141,7 +140,7 @@ class Event < ApplicationRecord
   end
 
   def display_profiles_ends_at
-    display_profiles_for_minutes + display_profiles_for_minutes.minutes
+    display_profiles_starts_at + display_profiles_for_minutes.minutes
   end
 
   def display_profiles?
