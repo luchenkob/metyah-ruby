@@ -31,7 +31,7 @@
         <dd><%= @event.event_type %></dd>
         <dt><strong><%= model_class.human_attribute_name(:ticket_purchase_url) %>:</strong></dt>
         <dd>
-          <% if @event.ticket_purchase_url %>
+          <% if @event.ticket_purchase_url.present? %>
             <%= link_to @event.ticket_purchase_url, @event.ticket_purchase_url, target: "_blank" %>
           <% else %>
             Not Provided
@@ -39,7 +39,7 @@
         </dd>
         <dt><strong><%= model_class.human_attribute_name(:contact_info) %>:</strong></dt>
         <dd>
-          <% if @event.ticket_purchase_url %>
+          <% if @event.contact_info.present? %>
             <%= simple_format @event.contact_info %>
           <% else %>
             Not Provided
