@@ -151,7 +151,7 @@ class Event < ApplicationRecord
   end
 
   def allow_messaging_ends_at
-    allow_messaging_starts_at + display_profiles_for_minutes.minutes
+    allow_messaging_starts_at + allow_messaging_for_minutes.minutes
   end
 
   def allow_messaging?
