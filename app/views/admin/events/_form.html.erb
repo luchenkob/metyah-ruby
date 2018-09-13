@@ -120,7 +120,7 @@
 
 <script>
   var calentimOptions = {
-    minDate: moment("<%= Time.current.to_date %>", "YYYY-MM-DD"),
+    minDate: moment("<%= Time.current.yesterday.to_date %>", "YYYY-MM-DD"),
     showHeader: false, // Hide selected dates
     showFooter: false, // Hide ranges
   };
