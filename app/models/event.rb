@@ -43,7 +43,7 @@ class Event < ApplicationRecord
   scope :inactive, -> { where(event_status: EVENT_STATUS_INACTIVE) }
 
   def self.past
-    where(end_at: Time.at(0)..Time.current)
+    active.where(end_at: Time.at(0)..Time.current)
   end
 
   def self.current
@@ -56,7 +56,19 @@ class Event < ApplicationRecord
   end
 
   def self.upcoming
-    where(start_at: Time.current..DateTime::Infinity.new)
+    active.where(start_at: Time.current..DateTime::Infinity.new)
+  end
+
+  def tense
+    if Event.past.include?(self)
+      "Past"
+    elsif Event.current.include?(self)
+      "Current"
+    elsif Event.upcoming.include?(self)
+      "Upcoming"
+    else
+      "Pending"
+    end
   end
 
   def self.find_by_code(entered_code)
