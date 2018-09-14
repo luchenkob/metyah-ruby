@@ -26,4 +26,13 @@ class User::PrivateMessage < ApplicationRecord
   def message_intents
 
   end
+
+  def self.threads_for(user, event = nil)
+    query = where(recipient_id: user.id)
+    if event.present?
+      query = query.where(event_id: event.id)
+    end
+
+    query.reorder(sender_id: :asc, created_at: :desc).to_a.uniq(&:sender_id).sort_by{ |pm| pm.created_at }.reverse!
+  end
 end

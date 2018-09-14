@@ -5,5 +5,5 @@
 </div>
 
 <div class='row'>
-  <%= render partial: 'user/events/current/inbox/message', collection: @messages.includes(:sender, :event, event: :place) %>
+  <%= render partial: 'user/events/current/inbox/message', collection: @messages %>
 </div>

@@ -16,14 +16,16 @@ class User::Events::CurrentController < UserController
   end
 
   def inbox
-    @messages = User::PrivateMessage
-    .where(recipient_id: current_user.id, event_id: @current_event.id)
-    .where.not(sender_id: current_user.blocked_user_ids)
-    .or(
-      User::PrivateMessage
-      .where(sender_id: current_user.id, event_id: @current_event.id)
-      .where.not(sender_id: current_user.blocked_user_ids)
-    ).includes(:sender, :event, event: :place)
+    # @messages = User::PrivateMessage
+    # .where(recipient_id: current_user.id, event_id: @current_event.id)
+    # .where.not(sender_id: current_user.blocked_user_ids)
+    # .or(
+    #   User::PrivateMessage
+    #   .where(sender_id: current_user.id, event_id: @current_event.id)
+    #   .where.not(sender_id: current_user.blocked_user_ids)
+    # ).includes(:sender, :event, event: :place)
+
+    @messages = User::PrivateMessage.threads_for(current_user, @current_event)
   end
 
   def message_modal
