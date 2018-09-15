@@ -11,6 +11,6 @@ class UserController < ApplicationController
   before_action :set_current_event
 
   def set_current_event
-    @current_event = Event.find_by(id: params[:id].to_i) || Event.current.reorder(:start_at).first
+    @current_event = Event.find_by(id: params[:id].to_i) || current_user.events.current.reorder(:start_at).first
   end
 end

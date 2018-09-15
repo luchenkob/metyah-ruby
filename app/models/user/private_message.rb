@@ -42,9 +42,17 @@ class User::PrivateMessage < ApplicationRecord
 
   def self.messages_for(user_id, sender_id, event_id)
     query = where(recipient_id: user_id, sender_id: sender_id)
-    if event_id.present?
-      query = query.where(event_id: event_id)
-    end
+
+    query = query.where(event_id: event_id) if event_id.present?
+
+    query.reorder(created_at: :desc)
+  end
+
+  def self.unread_messags_for(user_id, event_id = nil, sender_id = nil)
+    query = where(recipient_id: user_id, message_read: false)
+
+    query = query.where(sender_id: sender_id) if sender_id.present?
+    query = query.where(event_id: event_id) if event_id.present?
 
     query.reorder(created_at: :desc)
   end

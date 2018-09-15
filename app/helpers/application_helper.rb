@@ -24,6 +24,9 @@ module ApplicationHelper
     datetime_zoned(datetime, place).strftime("#{place.date_format} #{place.time_format}")
   end
 
+  def unread_messages_count(user, event = nil, sender = nil)
+    User::PrivateMessage.unread_messags_for(user.id, event&.id, sender&.id).size
+  end
 
   def bootstrap_class_for_flash(flash_type)
     case flash_type

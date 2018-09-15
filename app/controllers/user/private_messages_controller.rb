@@ -1,5 +1,6 @@
 class User::PrivateMessagesController < UserController
   before_action :set_user_private_message, only: [:show, :edit, :update, :destroy]
+  after_action :mark_messages_as_read, only: [:index]
 
   def index
     @sender = User.find(params[:sender_id])
@@ -62,5 +63,9 @@ class User::PrivateMessagesController < UserController
       pm_hash[:message_intent] = pm_hash[:message_intent].select { |mi| mi.present? }.join(',')
 
       pm_hash
+    end
+
+    def mark_messages_as_read
+      @user_private_messages.update_all(message_read: true)
     end
 end

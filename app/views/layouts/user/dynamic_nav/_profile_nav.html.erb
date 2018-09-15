@@ -8,7 +8,10 @@
                 class: "nav-link #{active_navigation?("profile", "settings") || active_navigation?("registrations", "edit")}"  %>
   </li>
   <li class='nav-item'>
-    <%= link_to "Messages", user_profile_messages_path,
-                class: "nav-link #{active_navigation?("profile", "messages")}"  %>
+    <%= link_to user_profile_messages_path,
+                class: "nav-link #{active_navigation?("profile", "messages")}" do  %>
+      Messages <%= render partial: 'shared/messages/unread_badge',
+                         locals: {number_unread_messages: unread_messages_count(current_user)} %>
+    <% end %>
   </li>
 </ul>
