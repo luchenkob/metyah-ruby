@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def unread_messages_count(user, event = nil, sender = nil)
-    User::PrivateMessage.unread_messags_for(user.id, event&.id, sender&.id).size
+    User::PrivateMessage.unread_messages_for(user.id, event&.id, sender&.id).size
   end
 
   def bootstrap_class_for_flash(flash_type)

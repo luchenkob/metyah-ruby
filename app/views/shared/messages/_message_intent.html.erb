@@ -1,0 +1,3 @@
+<% @user_private_messages.first.message_intent.split(',').each do |message_intent| %>
+  <span class="badge badge-primary"><%= message_intent %></span>
+<% end %>

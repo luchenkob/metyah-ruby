@@ -3,8 +3,7 @@ class User::PrivateMessage < ApplicationRecord
   belongs_to :recipient, :class_name => "User"
   belongs_to :event
 
-  validates :content, :recipient_id, :sender_id, :event_id, presence: true
-  validates :message_intent, presence: true, if: :message_intent_required?
+  validates :content, :recipient_id, :sender_id, :event_id, :message_intent, presence: true
   validates :content, length: { maximum: 250 }
 
   MESSAGE_INTENTS = [
@@ -42,17 +41,21 @@ class User::PrivateMessage < ApplicationRecord
 
   def self.messages_for(user_id, sender_id, event_id)
     query = where(recipient_id: user_id, sender_id: sender_id)
+    .or(where(recipient_id: sender_id, sender_id: user_id))
 
     query = query.where(event_id: event_id) if event_id.present?
 
     query.reorder(created_at: :desc)
   end
 
-  def self.unread_messags_for(user_id, event_id = nil, sender_id = nil)
+  def self.unread_messages_for(user_id, event_id = nil, sender_id = nil)
     query = where(recipient_id: user_id, message_read: false)
+    puts "Count: #{query.size}"
 
-    query = query.where(sender_id: sender_id) if sender_id.present?
-    query = query.where(event_id: event_id) if event_id.present?
+    query = query.where(sender_id: sender_id) unless sender_id.nil?
+    puts "Count: #{query.size}"
+    query = query.where(event_id: event_id) unless event_id.nil?
+    puts "Count: #{query.size}"
 
     query.reorder(created_at: :desc)
   end
