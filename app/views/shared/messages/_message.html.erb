@@ -30,7 +30,11 @@
         <br>
         <%= datetime_zoned_datetime(message.created_at, message.event.place) %>
         <br>
+        <%= link_to private_m %>
         <% if current_user.id == message.recipient_id %>
+              <%= f.hidden_field :sender_id, value: sender.id %>
+              <%= f.hidden_field :recipient_id, value: recipient_id.id %>
+              <%= f.hidden_field :event_id, value: @current_event&.id %>
           <%= form_with url: user_current_message_modal_path(id: message.event.id) do |f| %>
             <%= f.hidden_field :send_to_id, value: sender.id %>
             <div class="form-group">

@@ -25,7 +25,7 @@ class User::Events::CurrentController < UserController
     #   .where.not(sender_id: current_user.blocked_user_ids)
     # ).includes(:sender, :event, event: :place)
 
-    @messages = User::PrivateMessage.threads_for(current_user, @current_event)
+    @messages = User::PrivateMessage.threads_for(current_user, @current_event.id)
   end
 
   def message_modal

@@ -1,6 +1,14 @@
 class User::PrivateMessagesController < UserController
   before_action :set_user_private_message, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @sender = User.find(params[:sender_id])
+    @event = Event.find(params[:event_id])
+
+    @user_private_messages = User::PrivateMessage
+    .messages_for(current_user.id, @sender.id, @event.id)
+  end
+
   # POST /user/private_messages
   # POST /user/private_messages.json
   def create
@@ -34,11 +42,11 @@ class User::PrivateMessagesController < UserController
   # DELETE /user/private_messages/1
   # DELETE /user/private_messages/1.json
   def destroy
-    @user_private_message.destroy
-    respond_to do |format|
-      format.html { redirect_to user_private_messages_url, notice: 'Private message was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # @user_private_message.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to user_private_messages_url, notice: 'Private message was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

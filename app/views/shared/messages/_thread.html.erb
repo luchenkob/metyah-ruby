@@ -1,0 +1,40 @@
+<% sender = thread.sender %>
+
+<div class="card">
+  <div class="card-body">
+    <div class='row'>
+      <div class='col-md-3'>
+        <% if thumb_photo_url_for(sender).present? %>
+          <img alt="Thumb" src="<%= thumb_photo_url_for(sender) %>" class='img-fluid' />
+        <% end %>
+      </div>
+      <div class='col-md-6'>
+        <% if current_user.id == thread.recipient_id %>
+          <div id='votes-<%= sender.id %>'>
+            <%= render partial: 'user/voting/votes', locals: {voter: current_user, votable: sender, display_status: true } %>
+          </div>
+        <% end %>
+        <h4 class="card-title">
+          <%= sender.first_name %>
+        </h4>
+        <br>
+        <br>
+        <p><%= thread.content %></p>
+
+        <div class='text-center'>
+          <% thread.message_intent.split(',').each do |message_intent| %>
+            <span class="badge badge-primary"><%= message_intent %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class='col-md-3 text-center'>
+        <br>
+        <%= datetime_zoned_datetime(thread.created_at, thread.event.place) %>
+        <br>
+        <%= link_to "View Thread",
+            user_private_messages_path(sender_id: thread.sender_id, event_id: thread.event_id),
+            class: "btn btn-primary btn-round" %>
+      </div>
+    </div>
+  </div>
+</div>

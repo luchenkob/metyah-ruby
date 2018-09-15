@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   get 'user/events' => 'user/events#index'
   get 'user', to: 'user/events#index'
+
   namespace :user do
     resources :events, only: [:show, :index] do
       collection do
