@@ -31,9 +31,11 @@
         <br>
         <%= datetime_zoned_datetime(thread.created_at, thread.event.place) %>
         <br>
-        <%= link_to "View Thread",
-            user_private_messages_path(sender_id: thread.sender_id, event_id: thread.event_id),
-            class: "btn btn-primary btn-round" %>
+        <%= link_to user_private_messages_path(sender_id: thread.sender_id, event_id: thread.event_id),
+                    class: "btn btn-primary btn-round" do %>
+            View Thread <%= render partial: 'shared/messages/unread_badge',
+                               locals: {number_unread_messages: unread_messages_count(current_user, @current_event, thread.sender)} %>
+        <% end %>
       </div>
     </div>
   </div>
