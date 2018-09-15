@@ -1,6 +1,6 @@
 <% if @current_event.display_profiles? %>
   <div class="alert alert-success col-12" role="alert">
-    Profiles are now visible
+    <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
   </div>
 <% else %>
   <div class="alert alert-danger col-12" role="alert">
@@ -8,15 +8,6 @@
   </div>
 <% end %>
 
-<% if @event_users.present? %>
-  <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
-<% else %>
+<% if !@event_users.present? %>
   No one is attending this event. :(
 <% end %>
-
-<h2>
-  All Event Users<br>
-  <small>(TEMP DEMO ONLY)</small>
-</h2>
-
-<%= render partial: 'user/events/current/event_users', locals: { event_users: EventUser.all } %>
