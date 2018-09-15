@@ -12,14 +12,20 @@
         <% if user_signed_in? %>
           <% if @current_event %>
             <li class='nav-item <%= active_navigation?("current") %>'>
-              <%= link_to @current_event.tense, user_events_current_path, class: "nav-link"  %>
+              <%= link_to user_events_current_path, class: "nav-link" do %>
+                <%= @current_event.tense %> <%= render partial: 'shared/messages/unread_badge',
+                                   locals: {number_unread_messages: unread_messages_count(current_user, @current_event)} %>
+              <% end %>
             </li>
           <% end %>
           <li class='nav-item <%= active_navigation?("events") %>'>
             <%= link_to "Events", user_events_path, class: "nav-link"  %>
           </li>
           <li class='nav-item <%= active_navigation?("profile", "profile") %>'>
-            <%= link_to 'Account', user_profile_path, class: "nav-link"  %>
+            <%= link_to user_profile_path, class: "nav-link" do %>
+            Account <%= render partial: 'shared/messages/unread_badge',
+                               locals: {number_unread_messages: unread_messages_count(current_user)} %>
+            <% end %>
           </li>
           <li class='nav-item'>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>

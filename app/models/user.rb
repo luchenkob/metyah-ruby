@@ -59,6 +59,10 @@ class User < ApplicationRecord
     end
   end
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def age
     # Source: https://medium.com/@craigsheen/calculating-age-in-rails-9bb661f11303
     # May be slightly off based on timezone
@@ -92,6 +96,5 @@ class User < ApplicationRecord
     .for_type(User) # Users only
     .votables # Get list of votables
   end
-
 
 end

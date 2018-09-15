@@ -14,13 +14,11 @@
     </div>
     <div class="modal-body">
       <% if @current_event.allow_messaging? %>
-        <%# render partial: 'user/events/current/inbox/message_modal/allowed' %>
+        <%= render partial: '/user/events/current/inbox/message_modal/allowed' %>
       <% else %>
-        <%# render partial: 'user/events/current/inbox/message_modal/denied' %>
+        <%= render partial: '/user/events/current/inbox/message_modal/denied' %>
+        <%= render partial: '/user/events/current/inbox/message_modal/allowed' %>
       <% end %>
-        <%= render partial: 'user/events/current/inbox/message_modal/allowed' %>
-        <hr>
-        <%= render partial: 'user/events/current/inbox/message_modal/denied' %>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">Close</button>

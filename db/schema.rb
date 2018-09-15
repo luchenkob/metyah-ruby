@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_12_064900) do
+ActiveRecord::Schema.define(version: 2018_09_15_003819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2018_09_12_064900) do
     t.bigint "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "message_read"
     t.index ["event_id"], name: "index_user_private_messages_on_event_id"
     t.index ["recipient_id"], name: "index_user_private_messages_on_recipient_id"
     t.index ["sender_id"], name: "index_user_private_messages_on_sender_id"

@@ -1,4 +1,5 @@
-<% sender = message.sender %>
+<% sender = thread.sender %>
+
 <div class="card">
   <div class="card-body">
     <div class='row'>
@@ -8,7 +9,7 @@
         <% end %>
       </div>
       <div class='col-md-6'>
-        <% if current_user.id == message.recipient_id %>
+        <% if current_user.id == thread.recipient_id %>
           <div id='votes-<%= sender.id %>'>
             <%= render partial: 'user/voting/votes', locals: {voter: current_user, votable: sender, display_status: true } %>
           </div>
@@ -18,28 +19,24 @@
         </h4>
         <br>
         <br>
-        <p><%= message.content %></p>
+        <p><%= thread.content %></p>
 
         <div class='text-center'>
-          <% message.message_intent.split(',').each do |message_intent| %>
+          <% thread.message_intent.split(',').each do |message_intent| %>
             <span class="badge badge-primary"><%= message_intent %></span>
           <% end %>
         </div>
       </div>
       <div class='col-md-3 text-center'>
         <br>
-        <%= datetime_zoned_datetime(message.created_at, message.event.place) %>
+        <%= datetime_zoned_datetime(thread.created_at, thread.event.place) %>
         <br>
-        <% if current_user.id == message.recipient_id %>
-          <%= form_with url: user_current_message_modal_path(id: message.event.id) do |f| %>
-            <%= f.hidden_field :send_to_id, value: sender.id %>
-            <div class="form-group">
-              <%= f.submit "Reply", :class => 'btn btn-primary btn-round' %>
-            </div>
-          <% end %>
+        <%= link_to user_private_messages_path(sender_id: thread.sender_id, event_id: @current_event&.id),
+                    class: "btn btn-primary btn-round" do %>
+            View Thread <%= render partial: 'shared/messages/unread_badge',
+                               locals: {number_unread_messages: unread_messages_count(current_user, @current_event, thread.sender)} %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
