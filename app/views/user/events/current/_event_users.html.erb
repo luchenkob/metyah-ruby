@@ -1,6 +1,7 @@
 <% model_class = User %>
 <div class='row'>
   <% event_users.each.with_index do |event_user, index| %>
+    <% next if event_user == current_user %>
     <% user = event_user.user %>
     <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
