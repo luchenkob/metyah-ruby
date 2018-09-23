@@ -99,8 +99,9 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-  	:domain         => 'metyah-myklclason.c9users.io',
-    :host			      => 'metyah-myklclason.c9users.io',
+  	:domain         => ENV.fetch('HOST'),
+    :host		      	=> ENV.fetch('HOST'),
     :enable_starttls_auto => true
   }
+  config.action_mailer.default_url_options = { :host => ENV.fetch('HOST') }
 end
