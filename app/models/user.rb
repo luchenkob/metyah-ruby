@@ -81,6 +81,14 @@ class User < ApplicationRecord
     end
   end
 
+  def has_blocked?(other_user)
+    vote_status(other_user) == User::VOTE_STATUS_BLOCK
+  end
+
+  def has_favorited?(other_user)
+    vote_status(other_user) == User::VOTE_STATUS_FAVORITE
+  end
+
   def blocked_user_ids
     @blocked_users = self
     .votes # Favorites/blocks

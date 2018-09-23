@@ -15,14 +15,32 @@ class User::PrivateMessagesController < UserController
   def create
     @user_private_message = User::PrivateMessage.new(user_private_message_params)
 
+    # Reject messages not allowed to be sent.
+    # Can only send messages when event allows it.
+    # Can only send messages if they are attending that event
+    # Blocked users are allowed to send messages to those who blocked them, but the receiver will not see them.
+
     respond_to do |format|
-      if @user_private_message.save
-        format.html { redirect_to inbox_user_current_event_path(id: @user_private_message.event_id), notice: 'Private message was successfully created.' }
-        format.json { render :show, status: :created, location: @user_private_message }
+      if @user_private_message.event.allow_messaging
+        sender = @user_private_message.sender
+        receiver = @user_private_message.receiver
+        if (sender.events.ids & receiver.events.ids).include?(@user_private_message.event.id)
+          if @user_private_message.save
+            format.html { redirect_to inbox_user_current_event_path(id: @user_private_message.event_id), notice: 'Private message was successfully created.' }
+            format.json { render :show, status: :created, location: @user_private_message }
+          else
+            format.html { render :new }
+            format.json { render json: @user_private_message.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { redirect_to root_path, notice: "This message is not valid" }
+          format.json { render json: {error: "This message is not valid"}, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @user_private_message.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, notice: "Messaging is not currently allowed for this event" }
+        format.json { render json: {error: "Messaging is not currently allowed for this event"}, status: :unauthorized }
       end
+
     end
   end
 
