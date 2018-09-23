@@ -42,6 +42,10 @@ class Event < ApplicationRecord
   scope :active, -> { where(event_status: EVENT_STATUS_ACTIVE) }
   scope :inactive, -> { where(event_status: EVENT_STATUS_INACTIVE) }
 
+  def active?
+    event_status == EVENT_STATUS_ACTIVE
+  end
+
   def self.past
     active.where(end_at: Time.at(0)..Time.current)
   end

@@ -1,4 +1,5 @@
 class User::EventsController < UserController
+  before_action :redirect_unless_active_event, only: [:show, :modal]
   before_action :set_event, only: [:show, :modal]
 
   def index
@@ -35,6 +36,10 @@ class User::EventsController < UserController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def redirect_unless_active_event
+      redirect_to my_events_user_events_path unless @event.active?
     end
 
 end
