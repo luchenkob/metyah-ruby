@@ -1,10 +1,14 @@
 <% if @current_event.display_profiles? %>
-  <div class="alert alert-success col-12" role="alert">
-    <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
-  </div>
+  <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
 <% else %>
   <div class="alert alert-danger col-12" role="alert">
-    Profiles will be visible at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
+    <% if Time.current < @current_event.display_profiles_starts_at_zoned %>
+      You will be able to view profiles at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
+    <% elsif Time.current > @current_event.display_profiles_ends_at_zoned %>
+      The period for viewing profiles has passed.
+    <% else %>
+      Messaging may be allowed, please refresh page and try again.
+    <% end %>
   </div>
 <% end %>
 
