@@ -1,1 +1,7 @@
-The period allowing for sending of messages has passed.
+<% if Time.current < @current_event.allow_messaging_starts_at_zoned %>
+  You will be able to send messages at <%= @current_event.allow_messaging_starts_at_zoned_datetime %>
+<% elsif Time.current > @current_event.allow_messaging_ends_at_zoned %>
+  The period for sending messages has passed.
+<% else %>
+  Messaging may be allowed, please refresh page and try again.
+<% end %>
