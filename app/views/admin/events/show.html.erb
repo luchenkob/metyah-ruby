@@ -50,13 +50,13 @@
   <dd><%= @event.start_at_zoned_datetime %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end_at) %>:</strong></dt>
   <dd><%= @event.end_at_zoned_datetime %></dd>
+  <dt><strong>Display Profile starts:</strong></dt>
+  <dd><%= @event.display_profiles_after_minutes %></dd>
+  <dt><strong>Display Profile ends:</strong></dt>
+  <dd><%= @event.display_profiles_for_minutes %></dd>
   <dt><strong>Messaging Starts:</strong></dt>
   <dd><%= @event.allow_messaging_starts_at_zoned_datetime %></dd>
   <dt><strong>Messaging ends:</strong></dt>
-  <dd><%= @event.allow_messaging_ends_at_zoned_datetime %></dd>
-  <dt><strong>Display Profile starts:</strong></dt>
-  <dd><%= @event.allow_messaging_starts_at_zoned_datetime %></dd>
-  <dt><strong>Display Profile ends:</strong></dt>
   <dd><%= @event.allow_messaging_ends_at_zoned_datetime %></dd>
 </dl>
 
