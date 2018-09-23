@@ -21,7 +21,7 @@ class User::PrivateMessagesController < UserController
     # Blocked users are allowed to send messages to those who blocked them, but the receiver will not see them.
 
     respond_to do |format|
-      if @user_private_message.event.allow_messaging
+      if @user_private_message.event.allow_messaging?
         sender = @user_private_message.sender
         receiver = @user_private_message.receiver
         if (sender.events.ids & receiver.events.ids).include?(@user_private_message.event.id)
