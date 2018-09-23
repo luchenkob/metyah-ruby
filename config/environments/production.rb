@@ -92,16 +92,15 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-  	:domain         => ENV.fetch('HOST'),
-    :host		      	=> ENV.fetch('HOST'),
+  	:domain         => "metyah-myklclason.c9users.io",
+    :host		      	=> "metyah-myklclason.c9users.io",
     :enable_starttls_auto => true
   }
-  config.action_mailer.default_url_options = { :host => ENV.fetch('HOST') }
+  config.action_mailer.default_url_options = { :host => "metyah-myklclason.c9users.io" }
 end
