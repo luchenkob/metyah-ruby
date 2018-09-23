@@ -65,7 +65,7 @@ class User::PrivateMessagesController < UserController
         pm_hash[:message_intent] = User::PrivateMessage.where(
           sender_id: pm_hash[:sender_id],
           recipient_id: pm_hash[:recipient_id],
-        ).first.message_intent
+        ).first&.message_intent
       end
 
       pm_hash
