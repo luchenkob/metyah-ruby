@@ -21,11 +21,7 @@
         <br>
         <p><%= thread.content %></p>
 
-        <div class='text-center'>
-          <% thread.message_intent.split(',').each do |message_intent| %>
-            <span class="badge badge-primary"><%= message_intent %></span>
-          <% end %>
-        </div>
+        <%= render partial: "shared/messages/message_intent", locals: {message_intent: thread.message_intent } %>
       </div>
       <div class='col-md-3 text-center'>
         <br>

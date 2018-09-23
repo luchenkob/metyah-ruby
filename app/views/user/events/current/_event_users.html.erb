@@ -1,8 +1,8 @@
 <% model_class = User %>
 <div class='row'>
   <% event_users.each.with_index do |event_user, index| %>
-    <% next if event_user.id == current_user.id %>
     <% user = event_user.user %>
+    <% next if user.id == current_user.id %>
     <div class="card col-md-5 <%= "offset-md-2"  if index % 2 == 1 %>">
       <div class="card-body">
         <span class='pull-right'>
@@ -27,12 +27,45 @@
         <br>
         <dl class="dl-horizontal row">
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:career) %>:</strong></dt>
-          <dd class="col-7"><%= user.career %></dd>
+          <dd class="col-7"><%= user.career %>&nbsp</dd>
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:school) %>:</strong></dt>
-          <dd class="col-7"><%= user.school %></dd>
+          <dd class="col-7"><%= user.school %>&nbsp</dd>
           <dt class="col-5"><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
-          <dd class="col-7"><%= user.location %></dd>
+          <dd class="col-7"><%= user.location %>&nbsp</dd>
         </dl>
+
+        <div class="list-group list-group-flush">
+          <div class='list-group-item'>
+            <div class="card-header" id="info-label-<%= user.id %>">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#info-<%= user.id %>" aria-expanded="true" aria-controls="info-<%= user.id %>">
+                  Intro and Interests
+                </button>
+              </h5>
+            </div>
+
+            <div id="info-<%= user.id %>" class="collapse" aria-labelledby="info-label-<%= user.id %>">
+              <div class="card-body">
+                <p>
+                  <% if user.bio %>
+                    <%= user.bio %>
+                  <% else %>
+                    No intro provided
+                  <% end %>
+                </p>
+
+                <p>
+                  <% if user.interests.present? %>
+                    <%= render partial: "shared/messages/message_intent", locals: {message_intent: user.interests } %>
+                  <% else %>
+                    No interests provided
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   <% end %>
