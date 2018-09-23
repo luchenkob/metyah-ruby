@@ -1,7 +1,5 @@
 <% if @current_event.display_profiles? %>
-  <div class="alert alert-success col-12" role="alert">
-    <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
-  </div>
+  <%= render partial: 'user/events/current/event_users', locals: { event_users: @event_users } %>
 <% else %>
   <div class="alert alert-danger col-12" role="alert">
     Profiles will be visible at <%= @current_event.display_profiles_starts_at_zoned_datetime %>
