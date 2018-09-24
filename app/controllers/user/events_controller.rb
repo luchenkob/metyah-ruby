@@ -10,7 +10,7 @@ class User::EventsController < UserController
   end
 
   def my_events
-    @events = current_user.events
+    @events = current_user.events.reorder(start_at: :desc)
   end
 
   def join
