@@ -18,13 +18,13 @@ class User::PrivateMessagesController < UserController
     # Reject messages not allowed to be sent.
     # Can only send messages when event allows it.
     # Can only send messages if they are attending that event
-    # Blocked users are allowed to send messages to those who blocked them, but the receiver will not see them.
+    # Blocked users are allowed to send messages to those who blocked them, but the recipient will not see them.
 
     respond_to do |format|
       if @user_private_message.event.allow_messaging?
         sender = @user_private_message.sender
-        receiver = @user_private_message.receiver
-        if (sender.events.ids & receiver.events.ids).include?(@user_private_message.event.id)
+        recipient = @user_private_message.recipient
+        if (sender.events.ids & recipient.events.ids).include?(@user_private_message.event.id)
           if @user_private_message.save
             format.html { redirect_to inbox_user_current_event_path(id: @user_private_message.event_id), notice: 'Private message was successfully created.' }
             format.json { render :show, status: :created, location: @user_private_message }
