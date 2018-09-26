@@ -3,7 +3,7 @@ class User::PrivateMessage < ApplicationRecord
   belongs_to :recipient, :class_name => "User"
   belongs_to :event
 
-  validates :content, :recipient_id, :sender_id, :event_id, :message_intent, presence: true
+  validates :content, :recipient_id, :sender_id, :event_id, presence: true
   validates :content, length: { maximum: 250 }
 
   MESSAGE_INTENTS = [
@@ -11,11 +11,17 @@ class User::PrivateMessage < ApplicationRecord
     MESSAGE_INTENT_PROFESSIONAL = "Professional".freeze,
     MESSAGE_INTENT_ROMANCE = "Romance".freeze,
   ].freeze
-  validate :message_intent_required?
+  validate :validate_message_intent_required
   validate :message_intent_valid
   serialize :message_intent
 
   default_scope { order(created_at: :desc) }
+
+  def validate_message_intent_required
+    if !(message_intent.present? && message_intent_required?)
+      errors[:message_intent] << 'is required'
+    end
+  end
 
   def message_intent_required?
     User::PrivateMessage.where(recipient_id: recipient_id, sender_id: recipient_id)
