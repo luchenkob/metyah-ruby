@@ -1,7 +1,7 @@
 <h2><%= @sender.name %> Messages</h2>
 <%- model_class = User::PrivateMessage -%>
 
-<% @user_private_messages.first.message_intent.split(',').each do |message_intent| %>
+<% @user_private_messages&.first&.message_intent.to_s.split(',').each do |message_intent| %>
   <span class="badge badge-primary"><%= message_intent %></span>
 <% end %>
 <table class="table table-striped">
