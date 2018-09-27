@@ -18,7 +18,7 @@ class User::PrivateMessage < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   def validate_message_intent_required
-    if !(message_intent.present? && message_intent_required?)
+    if !message_intent.present? && message_intent_required?
       errors[:message_intent] << 'is required'
     end
   end
