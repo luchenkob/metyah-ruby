@@ -1,41 +1,47 @@
 <h2><%= @sender.name %> Messages</h2>
 <%- model_class = User::PrivateMessage -%>
 
-<% @user_private_messages.reorder(created_at: :asc)&.first&.message_intent.to_s.split(',').each do |message_intent| %>
+<% @user_private_messages.first.message_intent.split(',').each do |message_intent| %>
   <span class="badge badge-primary"><%= message_intent %></span>
 <% end %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Sender</th>
-      <th>Content</th>
-      <th>Event</th>
-      <th>Received</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user_private_messages.each do |user_private_message| %>
-      <tr>
-        <td><%= user_private_message.sender.name %></td>
-        <td><%= user_private_message.content %></td>
-        <td><%= user_private_message.event.name %></td>
-        <td><%= user_private_message.created_at %></td>
-        <td>
-          <% if user_private_message.sender_id == @sender.id %>
-            <%= form_with url: user_current_message_modal_path(id: user_private_message.event.id) do |f| %>
-              <%= f.hidden_field :send_to_id, value: @sender.id %>
-              <div class="form-group">
-                <%= f.submit "Reply", :class => 'btn btn-primary btn-round' %>
-              </div>
-            <% end %>
+
+  <% old_event_name = nil %>
+  <% old_date = nil %>
+
+    <table class="table table-striped">
+    <% @user_private_messages.reorder(created_at: :asc).each do |user_private_message| %>
+        <% new_event_name = user_private_message.event.name %>
+        <% new_date = datetime_zoned_date(user_private_message.created_at, user_private_message.event.place) %>
+        <% time = datetime_zoned_time(user_private_message.created_at, user_private_message.event.place) %>
+        <% if old_event_name != new_event_name || old_date != new_date %>
+          <% if old_date != nil %>
+            </tbody>
           <% end %>
-        </td>
-      </tr>
+            <thead>
+              <th colspan=4><%= new_date %> <%= user_private_message.event.name %></th>
+            </thead>
+            <tbody>
+        <% end %>
+          <tr>
+            <td><%= time %></td>
+            <td><%= user_private_message.sender.name %></td>
+            <td><%= user_private_message.content %></td>
+            <td>
+              <% if user_private_message.sender_id == @sender.id %>
+                <%= form_with url: user_current_message_modal_path(id: user_private_message.event.id) do |f| %>
+                  <%= f.hidden_field :send_to_id, value: @sender.id %>
+                  <div class="form-group">
+                    <%= f.submit "Reply", :class => 'btn btn-primary btn-round' %>
+                  </div>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% old_event_name = new_event_name %>
+        <% old_date = new_date %>
     <% end %>
   </tbody>
 </table>
-
 
 <% if @event.present? %>
   <%= link_to "Event Threads", inbox_user_current_event_path(id: @event.id), class: 'btn btn-primary btn-round' %>
