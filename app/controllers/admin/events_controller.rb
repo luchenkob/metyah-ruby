@@ -1,5 +1,6 @@
 class Admin::EventsController < AdminController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_unless_event_host, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -60,6 +61,14 @@ class Admin::EventsController < AdminController
       format.html { redirect_to admin_events_url, notice: 'Event was successfully destroyed.' }
     end
   end
+
+  protected
+
+    def redirect_unless_event_host
+      if !(current_user == @event.host? ||  current_user.admin?)
+        redirect_to admin_events_path
+      end
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
