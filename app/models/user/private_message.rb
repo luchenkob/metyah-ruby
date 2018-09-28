@@ -65,4 +65,8 @@ class User::PrivateMessage < ApplicationRecord
 
     query.reorder(created_at: :desc)
   end
+
+  def is_unread_by?(user)
+    recipient_id == user.id && !message_read?
+  end
 end
